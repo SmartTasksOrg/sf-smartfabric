@@ -117,9 +117,9 @@ family (SmartPangolin's `SEC-*`, SmartSeal's `SEAL-*`).
 ## Part of the Smart* family
 
 SmartFabric is the **fabric layer** of IAIso — the plane the other tools ride on.
-It stacks naturally with [SmartSeal](https://github.com/SmartTasksOrg) (provenance
-records on the observability plane), [SmartRoute](https://github.com/SmartTasksOrg)
-(trust-gated routing), and [SmartLLMCost](https://github.com/SmartTasksOrg) (the
+It stacks naturally with [SmartSeal](https://github.com/SmartTasksOrg/smartseal) (provenance
+records on the observability plane), [SmartRoute](https://github.com/SmartTasksOrg/smartroute)
+(trust-gated routing), and [SmartLLMCost](https://github.com/SmartTasksOrg/smartllmcost) (the
 resource-accounting record — characteristic #23). Everything conforms to the open
 **[IAIso standard](https://github.com/SmartTasksOrg/IAISO)** and bundles in
 **[SmartTasks.cloud](https://smarttasks.cloud)**.
@@ -147,3 +147,4 @@ run Protobuf binary interop (field numbers are frozen; not exercised here withou
 
 Companies wanting hands-on integration of the fabric into their architecture,
 audit-ready: **[enterprise@smarttasks.cloud](mailto:enterprise@smarttasks.cloud)**.
+
