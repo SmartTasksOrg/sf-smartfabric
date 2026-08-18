@@ -1,0 +1,22 @@
+{
+  "family": "Smart*",
+  "tool": "SmartFabric",
+  "version": "0.5.0",
+  "protocol": "IAIso Fabric Protocol (IFP)",
+  "iaiso_section": "§0 · Fabric (fleet containment)",
+  "rule_prefix": "FAB-*",
+  "share_mode": "public",
+  "binds_to": "https://github.com/SmartTasksOrg/IAISO/tree/main/IAIso-v5.0/core",
+  "cross_promote": [
+    "SmartSeal",
+    "SmartRoute",
+    "SmartCheck",
+    "SmartPangolin",
+    "SmartStandard",
+    "SmartLLMCost"
+  ],
+  "links": {
+    "iaiso": "https://iaiso.org",
+    "cloud": "https://smarttasks.cloud"
+  }
+}

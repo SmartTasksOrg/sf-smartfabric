@@ -1,0 +1,10 @@
+#cloud-config
+# Boot a SmartFabric node on a GCP e2-micro (free tier). Installs Docker and runs
+# the node container on :8770. For production, front it with a load balancer and
+# real TLS (docs/04) rather than exposing the node directly.
+packages:
+  - docker.io
+runcmd:
+  - systemctl enable --now docker
+  - docker run -d --restart always -p 8770:8770 --name smartfabric-node
+      ghcr.io/smarttasksorg/smartfabric:latest

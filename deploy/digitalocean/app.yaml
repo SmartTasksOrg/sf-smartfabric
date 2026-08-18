@@ -1,0 +1,16 @@
+# DigitalOcean App Platform spec for a SmartFabric node.
+#   doctl apps create --spec app.yaml
+name: smartfabric-node
+services:
+  - name: node
+    image:
+      registry_type: GHCR
+      registry: smarttasksorg
+      repository: smartfabric
+      tag: latest
+    run_command: smartfabric serve --host 0.0.0.0 --port 8770
+    http_port: 8770
+    health_check:
+      http_path: /health
+    instance_size_slug: basic-xxs
+    instance_count: 1

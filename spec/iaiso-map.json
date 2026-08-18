@@ -1,0 +1,37 @@
+{
+  "tool": "SmartFabric",
+  "package": "smartfabric",
+  "version": "0.5.0",
+  "protocol": "IAIso Fabric Protocol (IFP)",
+  "iaiso_section": "§0 · Fabric (fleet containment)",
+  "rule_prefix": "FAB-*",
+  "conforms_to": "https://github.com/SmartTasksOrg/IAISO",
+  "binds_to_core": "https://github.com/SmartTasksOrg/IAISO/tree/main/IAIso-v5.0/core",
+  "core_framework_version": "5.0",
+  "cloud": "https://smarttasks.cloud",
+  "carries": [
+    "pressure model (dp/dt)",
+    "containment layers 0-6",
+    "the 5 invariants",
+    "ConsentScope (Layer 5)",
+    "atomic reset (invariant 2)",
+    "global halt (Layer 6)"
+  ],
+  "stacks_with": [
+    "SmartSeal",
+    "SmartRoute",
+    "SmartLLMCost"
+  ],
+  "reuses": {
+    "accounting": "smartllmcost (resource-accounting record, characteristic #23)",
+    "adjudication": "jury/council pattern (conformance + fuzzy policy calls)"
+  },
+  "starter_kits": {
+    "Python": "https://github.com/SmartTasksOrg/IAIso/tree/main/starter-kits/python",
+    "Node / TypeScript": "https://github.com/SmartTasksOrg/IAIso/tree/main/starter-kits/node",
+    "Go": "https://github.com/SmartTasksOrg/IAIso/tree/main/starter-kits/go",
+    "Java": "https://github.com/SmartTasksOrg/IAIso/tree/main/starter-kits/java",
+    "PHP": "https://github.com/SmartTasksOrg/IAIso/tree/main/starter-kits/php",
+    "Rust": "https://github.com/SmartTasksOrg/IAIso/tree/main/starter-kits/rust"
+  }
+}

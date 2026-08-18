@@ -1,0 +1,48 @@
+# SmartFabric node — Kubernetes Deployment + Service.
+# Runs N replicas of the node service behind a ClusterIP. For a real fabric, add
+# the registry/mTLS services (docs/04); mount certs from a Secret (see below).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartfabric-node
+  labels: { app: smartfabric-node }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: smartfabric-node }
+  template:
+    metadata:
+      labels: { app: smartfabric-node }
+    spec:
+      containers:
+        - name: node
+          image: ghcr.io/smarttasksorg/smartfabric:latest   # publish this first
+          args: ["serve", "--host", "0.0.0.0", "--port", "8770"]
+          ports:
+            - containerPort: 8770
+          readinessProbe:
+            httpGet: { path: /health, port: 8770 }
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: 8770 }
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits:   { cpu: "250m", memory: "128Mi" }
+          # For mTLS: mount a Secret with server.crt/server.key/ca.crt and pass
+          #   --tls-cert /certs/server.crt --tls-key /certs/server.key --tls-ca /certs/ca.crt
+          # volumeMounts: [{ name: certs, mountPath: /certs, readOnly: true }]
+      # volumes: [{ name: certs, secret: { secretName: smartfabric-certs } }]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartfabric-node
+spec:
+  selector: { app: smartfabric-node }
+  ports:
+    - port: 8770
+      targetPort: 8770
+  type: ClusterIP

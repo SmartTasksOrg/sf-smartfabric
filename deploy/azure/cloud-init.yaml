@@ -1,0 +1,9 @@
+#cloud-config
+# Azure VM (B1s) SmartFabric node. Open port 8770 in the Network Security Group.
+package_update: true
+packages:
+  - docker.io
+runcmd:
+  - systemctl enable --now docker
+  - docker run -d --restart always -p 8770:8770 --name smartfabric-node
+      ghcr.io/smarttasksorg/smartfabric:latest

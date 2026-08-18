@@ -1,0 +1,24 @@
+# Fly.io deploy of a SmartFabric node. Uses the published image directly.
+#   fly launch --no-deploy   # once, to create the app
+#   fly deploy
+app = "smartfabric-node"
+primary_region = "iad"
+
+[build]
+  image = "ghcr.io/smarttasksorg/smartfabric:latest"   # or build from ../Dockerfile
+
+[[services]]
+  internal_port = 8770
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [services.http_checks]
+    path = "/health"
+    interval = "15s"
+    timeout = "2s"
+
+[processes]
+  app = "serve --host 0.0.0.0 --port 8770"

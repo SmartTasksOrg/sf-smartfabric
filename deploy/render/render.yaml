@@ -1,0 +1,13 @@
+# Render.com blueprint for a SmartFabric node (Docker runtime).
+services:
+  - type: web
+    name: smartfabric-node
+    runtime: image
+    image:
+      url: ghcr.io/smarttasksorg/smartfabric:latest   # publish this first
+    dockerCommand: serve --host 0.0.0.0 --port 8770
+    healthCheckPath: /health
+    envVars:
+      - key: SMARTFABRIC_PORT
+        value: "8770"
+    plan: free

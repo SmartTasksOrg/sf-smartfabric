@@ -1,0 +1,127 @@
+// IAIso Fabric Protocol (IFP) — binary wire contract.
+//
+// FROZEN. Field numbers below are permanent and MUST NOT be reused or renumbered.
+// New fields append with new numbers; removed fields are `reserved`. This is the
+// binary counterpart to the canonical-JSON baseline in docs/08_WIRE_FORMAT.md.
+// A node MAY implement Protobuf; it MUST implement canonical JSON.
+//
+// wire_version: 0.2
+
+syntax = "proto3";
+
+package iaiso.fabric.v0;
+
+option go_package = "github.com/SmartTasksOrg/smartfabric/gen/go;fabricv0";
+
+// ---- Enums -----------------------------------------------------------------
+
+// Closed CIR verb set. Numbers are frozen; extensions use CIRHeader.ext_verb.
+enum Verb {
+  VERB_UNSPECIFIED   = 0;
+  DESCRIBE           = 1;
+  NEGOTIATE          = 2;
+  INVOKE             = 3;
+  QUERY              = 4;
+  STREAM_OPEN        = 5;
+  STREAM_DATA        = 6;
+  STREAM_CLOSE       = 7;
+  SUBSCRIBE          = 8;
+  EVENT              = 9;
+  PLAN               = 10;
+  PRESSURE_SAMPLE    = 11;
+  ESCALATE           = 12;
+  RESET              = 13;
+  CONSENT_ASSERT     = 14;
+  CONSENT_REVOKE     = 15;
+  POLICY_GET         = 16;
+  POLICY_ASSERT      = 17;
+  PROVENANCE_EMIT    = 18;
+  HALT_GLOBAL        = 19;
+}
+
+enum Zone {
+  ZONE_UNSPECIFIED = 0;
+  NOMINAL          = 1;
+  WARNING          = 2;
+  ESCALATION       = 3;
+  RELEASE          = 4;
+}
+
+enum InfluenceClass {
+  INFLUENCE_UNSPECIFIED = 0;
+  INERT                 = 1;
+  INFORMATIONAL         = 2;
+  PERSUASIVE            = 3;
+  ADAPTIVE              = 4;
+  AUTONOMOUS            = 5;
+}
+
+// ---- Envelope --------------------------------------------------------------
+
+message CIRHeader {
+  string id            = 1;  // ULID
+  Verb   verb          = 2;  // closed verb set
+  string ext_verb      = 3;  // set iff verb==VERB_UNSPECIFIED and this is x-<ns>-<verb>
+  string verb_version  = 4;  // semver
+  string from          = 5;  // iaiso:// address
+  string to            = 6;  // iaiso:// address
+  string idempotency   = 7;
+  string trace         = 8;  // W3C traceparent
+  uint32 deadline_ms   = 9;
+  string qos_profile   = 10;
+}
+
+message CIRAuth {
+  string token = 1;  // ConsentScope JWT (Layer 5)
+  string sig   = 2;  // payload signature (provenance)
+}
+
+message CIRBody {
+  string schema_ref = 1;  // type of payload
+  bytes  payload    = 2;  // opaque, typed by schema_ref
+}
+
+message CIRPolicy {
+  string         residency       = 1;
+  InfluenceClass influence_class = 2;
+  bool           audit_required  = 3;
+}
+
+message CIRMeta {
+  string placement_hint = 1;
+  string cost_hint      = 2;
+}
+
+message CIRMessage {
+  CIRHeader header = 1;
+  CIRAuth   auth   = 2;
+  CIRBody   body   = 3;
+  CIRPolicy policy = 4;
+  CIRMeta   meta   = 5;
+}
+
+// ---- Containment payloads (carried in CIRBody.payload by schema_ref) --------
+
+// pressure.sample — emitted on the clock (invariant 3) and on any zone change.
+message PressureSample {
+  double p         = 1;  // pressure in [0,1]
+  double dpdt      = 2;  // rate of change since last sample
+  Zone   zone      = 3;
+  double p_fleet   = 4;  // optional: aggregator's current fleet pressure
+  uint64 clock_seq = 5;  // monotonic per-session sequence
+}
+
+// escalate — a Layer-4 event.
+message Escalation {
+  string node                = 1;
+  Zone   zone                = 2;
+  uint32 required_authorizers = 3;  // default 2
+  string reason              = 4;
+}
+
+// halt.global — a Layer-6 existential event; every node MUST honour.
+message GlobalHalt {
+  string origin = 1;
+  string reason = 2;
+  bool   drain  = 3;  // true = drain then stop; false = stop now
+}

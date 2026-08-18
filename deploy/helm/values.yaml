@@ -1,0 +1,14 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/smarttasksorg/smartfabric   # publish this first
+  tag: "latest"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 8770
+resources:
+  requests: { cpu: "50m", memory: "64Mi" }
+  limits:   { cpu: "250m", memory: "128Mi" }
+mtls:
+  enabled: false          # set true and provide a secret with server.crt/key + ca.crt
+  secretName: smartfabric-certs

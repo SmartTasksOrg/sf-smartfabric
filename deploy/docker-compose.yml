@@ -1,0 +1,27 @@
+# A minimal two-node fabric. Both run the same node service on different ports;
+# a real fabric adds a registry + mTLS (docs/04) — this shows the service scaling
+# horizontally, which is the deployable unit.
+services:
+  node-a:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports: ["8770:8770"]
+    environment:
+      SMARTFABRIC_PORT: "8770"
+
+  node-b:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports: ["8771:8770"]
+    environment:
+      SMARTFABRIC_PORT: "8770"
+
+  # one-shot: run the live FAB-L-* harness against node-a once it's up
+  conformance:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    depends_on: [node-a]
+    entrypoint: ["sh", "-c", "sleep 3 && smartfabric live --url http://node-a:8770"]

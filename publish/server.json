@@ -1,0 +1,15 @@
+{
+  "name": "io.github.smarttasksorg/smartfabric",
+  "description": "IAIso Fabric Protocol (IFP) — carry & enforce IAIso containment across a fleet of governed AI nodes.",
+  "version": "0.5.0",
+  "homepage": "https://iaiso.org",
+  "repository": "https://github.com/SmartTasksOrg/smartfabric",
+  "license": "See LICENSE (Community Forking v2.0, aligned with IAIso)",
+  "packages": {
+    "pypi": "smartfabric"
+  },
+  "entrypoints": {
+    "cli": "smartfabric",
+    "demo": "smartfabric --demo"
+  }
+}

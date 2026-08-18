@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smartfabric"
+version = "0.5.0"
+description = "IAIso Fabric Protocol (IFP) — carry & enforce IAIso containment across a fleet of governed AI nodes."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "SmartTasks", email = "enterprise@smarttasks.cloud" },
+]
+keywords = ["iaiso", "ai-safety", "governance", "fabric", "protocol", "containment", "provenance"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Topic :: Security",
+  "Topic :: System :: Networking",
+]
+dependencies = [
+  "jsonschema>=4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-cov", "ruff", "mypy"]
+
+[project.urls]
+Homepage = "https://iaiso.org"
+Source = "https://github.com/SmartTasksOrg/smartfabric"
+Standard = "https://github.com/SmartTasksOrg/IAISO"
+Cloud = "https://smarttasks.cloud"
+
+[project.scripts]
+smartfabric = "smartfabric.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+smartfabric = ["py.typed"]
+# The normative schema/ and examples/ live at the repo root (spec-first layout,
+# like the rest of the Smart* family). The library resolves them from the source
+# tree; a packaging step that vendors them into the wheel is tracked in
+# private/roadmap/ENHANCEMENTS.md.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

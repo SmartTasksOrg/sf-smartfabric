@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-node
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: { app: {{ .Release.Name }}-node }
+  template:
+    metadata:
+      labels: { app: {{ .Release.Name }}-node }
+    spec:
+      containers:
+        - name: node
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "serve"
+            - "--host"
+            - "0.0.0.0"
+            - "--port"
+            - "{{ .Values.service.port }}"
+            {{- if .Values.mtls.enabled }}
+            - "--tls-cert"
+            - "/certs/server.crt"
+            - "--tls-key"
+            - "/certs/server.key"
+            - "--tls-ca"
+            - "/certs/ca.crt"
+            {{- end }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          readinessProbe:
+            httpGet: { path: /health, port: {{ .Values.service.port }} }
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.mtls.enabled }}
+          volumeMounts:
+            - name: certs
+              mountPath: /certs
+              readOnly: true
+          {{- end }}
+      {{- if .Values.mtls.enabled }}
+      volumes:
+        - name: certs
+          secret:
+            secretName: {{ .Values.mtls.secretName }}
+      {{- end }}
