@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "repo": "SmartTasksOrg/smartfabric",
+  "checked_on": "2026-10-08",
+  "names": [
+    {
+      "registry": "pypi",
+      "name": "smartfabric",
+      "registered": false,
+      "workflow": "release.yml",
+      "note": "first release pending; README in state A"
+    },
+    {
+      "registry": "npm",
+      "name": "@smarttasksorg/smartfabric",
+      "registered": false
+    },
+    {
+      "registry": "npm",
+      "name": "@smarttasks/smartfabric",
+      "registered": false
+    },
+    {
+      "registry": "crates",
+      "name": "smartfabric-port",
+      "registered": false
+    },
+    {
+      "registry": "ghcr",
+      "name": "ghcr.io/smarttasksorg/smartfabric",
+      "registered": false
+    },
+    {
+      "registry": "mcp",
+      "name": "io.github.smarttasksorg/smartfabric",
+      "registered": false
+    }
+  ],
+  "third_party": {
+    "pypi": [
+      "pip",
+      "build",
+      "pytest"
+    ],
+    "npm": []
+  },
+  "local_images": [
+    "smartfabric-node"
+  ],
+  "git_owners": [
+    "SmartTasksOrg"
+  ],
+  "exclude_paths": []
+}
