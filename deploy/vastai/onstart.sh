@@ -15,6 +15,7 @@ PORT="${SMARTFABRIC_PORT:-8770}"
 if command -v smartfabric >/dev/null 2>&1; then
   exec smartfabric serve --host 0.0.0.0 --port "$PORT"
 fi
-# Otherwise install from PyPI and run (for a generic CUDA/python base image):
-pip install --no-cache-dir smartfabric
+# Otherwise install from the repository at a fixed commit and run (for a generic CUDA/python base image).
+# pinned to a commit: smartfabric is not on PyPI yet; replace with a release tag
+pip install --no-cache-dir "git+https://github.com/SmartTasksOrg/smartfabric@e0d9eb95ec011678c183ac2b9ace2d2fa461b217"
 exec smartfabric serve --host 0.0.0.0 --port "$PORT"

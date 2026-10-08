@@ -31,8 +31,14 @@ everywhere at once?"* — the questions IAIso's Layer 3 (ecosystem coupling),
 Layer 4 (escalation) and Layer 6 (existential guards) can only answer if nodes
 speak a common protocol.
 
+SmartFabric is not published on PyPI yet. Until this README says otherwise, a package called `smartfabric` on any registry is not ours.
+
 ```bash
-pip install smartfabric
+git clone https://github.com/SmartTasksOrg/smartfabric
+cd smartfabric
+python -m venv .venv
+. .venv/bin/activate          # Windows PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install .
 smartfabric --demo        # offline tour: pressure → fleet → conformance
 ```
 
@@ -52,7 +58,7 @@ smartfabric --demo        # offline tour: pressure → fleet → conformance
 
 | Where you work | How you run it |
 |---|---|
-| **Python** | `pip install smartfabric` |
+| **Python** | from a clone: `python -m pip install .` (not on PyPI yet) |
 | **CLI (validate)** | `smartfabric validate <fp.json>` · `conformance <fp.json>` · `fleet <fleet.json>` |
 | **CLI (run a node)** | `smartfabric serve` runs a node · `smartfabric registry` runs the fleet registry · `smartfabric live` runs the `FAB-L-*` harness |
 | **Behavioural proof** | `smartfabric vectors` runs the pinned interop vectors; `ports/conformance/run.sh` runs them across Python + Node + Java |
