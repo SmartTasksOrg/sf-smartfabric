@@ -1,4 +1,4 @@
-"""`smartfabric --demo` — a deterministic, offline tour of the protocol.
+"""`sf-smartfabric --demo` — a deterministic, offline tour of the protocol.
 
 Runs three things against bundled synthetic data, no network required:
   1. the single-node pressure model driving a token/tool workload to release,
@@ -19,7 +19,7 @@ from .pressure import NodeSample, PressureConfig, PressureEngine, fleet_pressure
 def _bundled(*parts: str) -> dict:
     """Load a bundled JSON file, whether installed or run from source."""
     try:
-        ref = resources.files("smartfabric")
+        ref = resources.files("sf-smartfabric")
         for p in parts:
             ref = ref / p
         return json.loads(ref.read_text())

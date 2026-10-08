@@ -1,6 +1,6 @@
 # deploy/ — running a fabric node
 
-Everything here deploys the **node service** (`smartfabric serve`) — a real HTTP/CIR
+Everything here deploys the **node service** (`sf-smartfabric serve`) — a real HTTP/CIR
 service that enforces IAIso containment (consent-gating, escalation, atomic release,
 global halt, and optional mTLS). One container image, many targets.
 
@@ -37,7 +37,7 @@ docker run -p 8770:8770 smartfabric-node
 docker compose -f deploy/docker-compose.yml up --build
 ```
 
-Then drive it: `smartfabric live --url http://localhost:8770`.
+Then drive it: `sf-smartfabric live --url http://localhost:8770`.
 
 ## Turning on mTLS
 
@@ -46,7 +46,7 @@ The node speaks plain HTTP/JSON by default. For anything beyond a trusted networ
 
 ```
 scripts/gen_certs.sh certs client-a          # demo PKI (use your real PKI in prod)
-smartfabric serve --tls-cert certs/server.crt --tls-key certs/server.key --tls-ca certs/ca.crt
+sf-smartfabric serve --tls-cert certs/server.crt --tls-key certs/server.key --tls-ca certs/ca.crt
 ```
 
 The node then presents its cert and rejects any peer without one chaining to the
@@ -57,7 +57,7 @@ fabric CA. In Kubernetes/Helm, mount the certs from a Secret and flip `mtls.enab
 - The Dockerfile, compose, k8s, and Helm chart are complete; they were **authored
   here but not built/applied in the sandbox** (no Docker/kubectl/helm daemon).
   Build the image once in your environment before relying on the tag.
-- Every cloud/platform config references `ghcr.io/smarttasksorg/smartfabric:latest` —
+- Every cloud/platform config references `ghcr.io/smarttasksorg/sf-smartfabric:latest` —
   a placeholder for your published image. Publish it first (`private/release/`).
 - The base node is HTTP/JSON with no registry and no authn beyond the ConsentScope
   check. mTLS is available (above) and is the right baseline for any shared or

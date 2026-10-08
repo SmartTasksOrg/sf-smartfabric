@@ -6,9 +6,9 @@ architecture" sketch — enough to start building, not a finished design.
 > **Implementation status (v0.5.0).** Part of this reference architecture now
 > ships as runnable code, and part is still ahead. What exists today:
 > the **node service** (CIR core + HTTP transport + verb dispatch + session
-> state — `src/smartfabric/node.py`, see docs/09), **mTLS** transport
-> (`src/smartfabric/mtls.py`), the **registry** (self-registration, health TTL,
-> and fleet aggregation — `src/smartfabric/registry.py`), the **pressure
+> state — `src/sf_smartfabric/node.py`, see docs/09), **mTLS** transport
+> (`src/sf_smartfabric/mtls.py`), the **registry** (self-registration, health TTL,
+> and fleet aggregation — `src/sf_smartfabric/registry.py`), the **pressure
 > aggregator** (`/fleet` on the registry + `fleet_pressure()`), the **consent
 > gate** (default-deny expansion, invariant 4), the **reset coordinator** and
 > **global-halt** mechanics (invariants 2 and Layer 6, in the node), and the

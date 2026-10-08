@@ -7,13 +7,13 @@ service runs these and issues a signed report the node includes in its fingerpri
 
 Every check below has a stable **`FAB-*` ID** (the fabric's analogue of the
 family's `PREFIX-*` rule IDs — SmartPangolin's `SEC-*`, SmartSeal's `SEAL-*`).
-The reference suite in [`src/smartfabric/conformance.py`](../src/smartfabric/conformance.py)
+The reference suite in [`src/sf_smartfabric/conformance.py`](../src/sf_smartfabric/conformance.py)
 runs them against a fingerprint and emits a report validating against
 [`schema/conformance-report.schema.json`](../schema/conformance-report.schema.json):
 
 ```bash
-smartfabric conformance schema/example.fingerprint.json          # human-readable
-smartfabric conformance schema/example.fingerprint.json --json   # the signed report
+sf-smartfabric conformance schema/example.fingerprint.json          # human-readable
+sf-smartfabric conformance schema/example.fingerprint.json --json   # the signed report
 ```
 
 | Check ID | Level | What it verifies |
@@ -43,8 +43,8 @@ smartfabric conformance schema/example.fingerprint.json --json   # the signed re
 > is behaviourally conformant iff it reproduces every one. Run both:
 >
 > ```bash
-> smartfabric conformance schema/example.fingerprint.json   # static FAB-*
-> smartfabric vectors                                        # behavioural vectors
+> sf-smartfabric conformance schema/example.fingerprint.json   # static FAB-*
+> sf-smartfabric vectors                                        # behavioural vectors
 > ports/conformance/run.sh                                   # BOTH impls, must agree
 > ```
 
@@ -52,7 +52,7 @@ smartfabric conformance schema/example.fingerprint.json --json   # the signed re
 
 A protocol is only a protocol when **two independent implementations interoperate
 on the same wire**. IFP meets that bar today: the Python reference
-([`src/smartfabric/`](../src/smartfabric/)) and an independent Node port
+([`src/sf_smartfabric/`](../src/sf_smartfabric/)) and an independent Node port
 ([`ports/node/`](../ports/node/)) both pass the identical `spec/vectors/*.json` —
 including **byte-exact** canonical-JSON and framing agreement (see
 [`docs/08_WIRE_FORMAT.md`](08_WIRE_FORMAT.md)). `ports/conformance/run.sh` is the

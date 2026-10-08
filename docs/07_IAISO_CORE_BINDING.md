@@ -57,8 +57,8 @@ reproduce the core's reference behaviour. Any enforcement deployment MUST
 calibrate against measured workload traces (the core says the same).
 
 > The reference implementation of this model is
-> [`src/smartfabric/pressure.py`](../src/smartfabric/pressure.py) — the table
-> above and that code are the same thing. Run `smartfabric --demo` to watch a
+> [`src/sf_smartfabric/pressure.py`](../src/sf_smartfabric/pressure.py) — the table
+> above and that code are the same thing. Run `sf-smartfabric --demo` to watch a
 > node accumulate to release.
 
 ## The 7 containment layers (0–6) as fabric responsibilities

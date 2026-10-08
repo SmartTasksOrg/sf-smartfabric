@@ -8,11 +8,11 @@ operational counterpart to the spec.
 ## 9.1 The node service
 
 A node is a process that speaks CIR over a transport and enforces the containment
-mechanics locally. The reference node is `src/smartfabric/node.py` — a dependency-
+mechanics locally. The reference node is `src/sf_smartfabric/node.py` — a dependency-
 free HTTP service.
 
 ```
-smartfabric serve --host 0.0.0.0 --port 8770
+sf-smartfabric serve --host 0.0.0.0 --port 8770
 ```
 
 Endpoints:
@@ -62,7 +62,7 @@ not chain to a CA the fabric trusts.
 
 ```
 scripts/gen_certs.sh certs client-a           # demo PKI: CA + server + client certs
-smartfabric serve \
+sf-smartfabric serve \
   --tls-cert certs/server.crt \
   --tls-key  certs/server.key \
   --tls-ca   certs/ca.crt                      # requiring a client cert = mTLS
@@ -72,7 +72,7 @@ smartfabric serve \
 - add `--tls-ca` → **mTLS** (client cert required, chaining to that CA).
 - `--tls-ca ... --no-client-cert` → TLS with the CA present but client certs optional.
 
-`src/smartfabric/mtls.py` exposes `server_ssl_context()` / `client_ssl_context()`
+`src/sf_smartfabric/mtls.py` exposes `server_ssl_context()` / `client_ssl_context()`
 and an `mtls_post()` helper. In Kubernetes/Helm, mount the certs from a Secret and
 set `mtls.enabled=true` (docs/10). Use your real PKI (SPIFFE/SPIRE, a cloud CA) in
 production; `gen_certs.sh` is a demo CA only.
@@ -84,8 +84,8 @@ vectors verify what an implementation *computes*; the **FAB-L** live checks veri
 what a running node actually *does* over the wire.
 
 ```
-smartfabric live                 # spawns a node in-process and drives it
-smartfabric live --url https://host:8770
+sf-smartfabric live                 # spawns a node in-process and drives it
+sf-smartfabric live --url https://host:8770
 ```
 
 | Check | Asserts |
@@ -102,12 +102,12 @@ family with no orchestration, which is what CI does.
 
 ## 9.4 The registry
 
-A single node governs itself; the **registry** (`src/smartfabric/registry.py`) is
+A single node governs itself; the **registry** (`src/sf_smartfabric/registry.py`) is
 what makes a *fleet* measurable as one organism. It is the discovery record store
 docs/04 calls for: nodes self-register on start and are drained on TTL lapse.
 
 ```
-smartfabric registry --host 0.0.0.0 --port 8760
+sf-smartfabric registry --host 0.0.0.0 --port 8760
 ```
 
 | Method / path | Purpose |
@@ -141,9 +141,9 @@ here is the smallest useful version and the aggregation point the dynamics layer
 The minimal running fabric is: one registry + N nodes, each self-registering.
 
 ```
-smartfabric registry --port 8760 &
-smartfabric serve --port 8770 &          # node A (register it with the registry)
-smartfabric serve --port 8771 &          # node B
+sf-smartfabric registry --port 8760 &
+sf-smartfabric serve --port 8770 &          # node A (register it with the registry)
+sf-smartfabric serve --port 8771 &          # node B
 # ... each node POSTs /register to the registry, then heartbeats ...
 curl localhost:8760/fleet                # topology-weighted P_fleet across the fleet
 ```

@@ -46,10 +46,10 @@ runs:
         FINGERPRINT: ${{ inputs.fingerprint }}
         FAIL_ON: ${{ inputs.fail-on }}
       run: |
-        smartfabric check "$FINGERPRINT" --fail-on "$FAIL_ON"
+        sf-smartfabric check "$FINGERPRINT" --fail-on "$FAIL_ON"
     - name: Run behavioral vectors
       shell: bash
-      run: smartfabric vectors
-    # Note: the live FAB-L-* harness (smartfabric live) needs a running node.
+      run: sf-smartfabric vectors
+    # Note: the live FAB-L-* harness (sf-smartfabric live) needs a running node.
     # Start one in a prior job/service and pass its URL:
-    #   smartfabric live --url http://localhost:8770
+    #   sf-smartfabric live --url http://localhost:8770
