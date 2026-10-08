@@ -1,4 +1,4 @@
-<!-- mcp-name: io.github.smarttasksorg/sf-smartfabric · part of the Smart* family -->
+<!-- mcp-name: io.github.smarttasksorg/sf-smartfabric -->
 <h1 align="center">🦔 SmartFabric</h1>
 <p align="center"><b>Carry IAIso containment across the whole fleet. One wire protocol, one node fingerprint — so many governed AI agents behave as one governed data fabric, not a pile of independently-wrapped agents.</b></p>
 <p align="center">
@@ -31,7 +31,13 @@ everywhere at once?"* — the questions IAIso's Layer 3 (ecosystem coupling),
 Layer 4 (escalation) and Layer 6 (existential guards) can only answer if nodes
 speak a common protocol.
 
-SmartFabric is not published on PyPI yet. Until this README says otherwise, a package called `smartfabric` on any registry is not ours.
+## Install
+
+SmartFabric is not published on PyPI or any other package registry yet. Until
+this section says otherwise, a package called `sf-smartfabric` on any registry
+is not ours, and neither is `smartfabric`.
+
+Install from a clone (Python 3.10 or later):
 
 ```bash
 git clone https://github.com/SmartTasksOrg/sf-smartfabric
@@ -39,8 +45,19 @@ cd sf-smartfabric
 python -m venv .venv
 . .venv/bin/activate          # Windows PowerShell: .\.venv\Scripts\Activate.ps1
 python -m pip install .
-sf-smartfabric --demo        # offline tour: pressure → fleet → conformance
+sf-smartfabric --demo
 ```
+
+## Status
+
+- **Version 0.5.0, experimental.** The reference implementation of the IAIso Fabric Protocol (IFP), version 0.5.0, with a frozen wire format and ports in nine other languages that reproduce the same behavioural vectors.
+- **Published:** nowhere yet; install from a clone (above).
+- **Tested:** on Python 3.10, 3.11 and 3.12 (Linux): the 59 tests, the demo, the behavioural vectors, the live `FAB-L-*` harness against an in-process node, and `ports/conformance/run.sh` across every port whose toolchain the runner has, on every push to master and every pull request (`.github/workflows/ci.yml`).
+- **Not tested:** Windows and macOS; Protobuf binary interop (field numbers are frozen, not exercised without `protoc`); ed25519 report signing (not implemented yet: a content digest stands in for the signature).
+- **Ports:** Node, Java, C, C++, Go, PHP, Rust, Ruby and C# ports in `ports/` reproduce the Python reference's vectors (`ports/conformance/run.sh`, run in CI); none is published on a registry.
+- **Protocol:** a frozen wire format (canonical-JSON encoding + LEB128 framing and a field-number-frozen `proto/fabric.proto`, see [`docs/08_WIRE_FORMAT.md`](docs/08_WIRE_FORMAT.md)) and behavioural conformance ([`spec/vectors/`](spec/vectors/) pins inputs to outputs; `sf-smartfabric vectors` runs them). Static `FAB-*` checks remain for what a node *declares*.
+- **Container image:** the deploy configs reference `ghcr.io/smarttasksorg/sf-smartfabric:0.5.0`, which is not published yet; build it locally from `Dockerfile` until it is.
+- **Security review:** none independent. Report vulnerabilities as described in [SECURITY.md](SECURITY.md).
 
 ## What it does, in one screen
 
@@ -130,24 +147,6 @@ resource-accounting record — characteristic #23). Everything conforms to the o
 **[IAIso standard](https://github.com/SmartTasksOrg/IAISO)** and bundles in
 **[SmartTasks.cloud](https://smarttasks.cloud)**.
 
-## Status
-
-`v0.2.0 — protocol` (was a draft at v0.1). Grounded on IAIso v5.0. The three
-things that separate a draft from a protocol are now in place and enforced by
-running code:
-
-- **A frozen wire format** — canonical-JSON encoding + LEB128 framing, and a
-  field-number-frozen `proto/fabric.proto`. See [`docs/08_WIRE_FORMAT.md`](docs/08_WIRE_FORMAT.md).
-- **Two independent implementations that interoperate** — the Python reference
-  and an independent Node port ([`ports/node/`](ports/node/)) both pass the same
-  vectors, byte-for-byte. `ports/conformance/run.sh` is the gate.
-- **Behavioural conformance** — [`spec/vectors/`](spec/vectors/) pins inputs →
-  outputs; `sf-smartfabric vectors` runs them. Static `FAB-*` checks remain for what
-  a node *declares*.
-
-Still honest about what's next: a live network harness against a running node,
-run Protobuf binary interop (field numbers are frozen; not exercised here without
-`protoc`), and ed25519 report signing. See `CHANGELOG.md`.
 
 ## Contact
 

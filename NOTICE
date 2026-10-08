@@ -1,0 +1,16 @@
+SmartFabric
+Copyright 2026 SmartTasks
+
+Licensed under the terms in LICENSE (see that file).
+
+Names and affiliation
+---------------------
+
+SmartFabric is published by SmartTasksOrg. The only package names it is
+published under are those marked "registered": true in names.json.
+
+LangChain is a trademark of its owner.
+AWS is a trademark of its owner.
+All other names are the property of their respective owners. Their use here
+only says what the software reads, evaluates or connects to; it does not
+imply affiliation, sponsorship or endorsement.

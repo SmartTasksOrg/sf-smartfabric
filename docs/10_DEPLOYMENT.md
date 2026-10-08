@@ -68,7 +68,7 @@ where the compute is, so pressure, consent-gating, and halt enforcement sit next
 the thing being governed with no extra hop.
 
 Both providers are image-based: give them
-`ghcr.io/<org>/sf-smartfabric:latest` and the command `serve --host 0.0.0.0 --port 8770`,
+`ghcr.io/<org>/sf-smartfabric:0.5.0` and the command `serve --host 0.0.0.0 --port 8770`,
 expose the port, and verify with `sf-smartfabric live --url <provider-url>`.
 `deploy/vastai/onstart.sh` also handles the case where you're adding the node as a
 sidecar to a CUDA base image you already run (it installs the package from PyPI if

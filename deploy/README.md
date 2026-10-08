@@ -57,7 +57,7 @@ fabric CA. In Kubernetes/Helm, mount the certs from a Secret and flip `mtls.enab
 - The Dockerfile, compose, k8s, and Helm chart are complete; they were **authored
   here but not built/applied in the sandbox** (no Docker/kubectl/helm daemon).
   Build the image once in your environment before relying on the tag.
-- Every cloud/platform config references `ghcr.io/smarttasksorg/sf-smartfabric:latest` —
+- Every cloud/platform config references `ghcr.io/smarttasksorg/sf-smartfabric:0.5.0` —
   a placeholder for your published image. Publish it first (`private/release/`).
 - The base node is HTTP/JSON with no registry and no authn beyond the ConsentScope
   check. mTLS is available (above) and is the right baseline for any shared or

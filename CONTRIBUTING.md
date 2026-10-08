@@ -5,20 +5,40 @@ The protocol is defined by `spec/vectors/*.json` and the docs in `docs/`, not by
 single codebase — so the bar for a change is simple: **it must keep every
 implementation reproducing every vector, byte-for-byte.**
 
+**Security problems do not go here**: see [SECURITY.md](SECURITY.md).
+
+## Before you start
+
+- For anything larger than a fix, open an issue first and say what you want
+  to change and why.
+- By contributing you agree that your contribution is licensed under the
+  licence in [LICENSE](LICENSE). There is no separate contributor agreement.
+- Be decent: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Rules every change keeps
+
+1. No secrets, keys, tokens or personal data in the repository.
+2. No new runtime dependency without a maintainer's decision.
+3. Say what was tested and what was not. Do not write that something works
+   on a platform or at a scale it was not run on.
+4. Install lines name only packages listed with `"registered": true` in
+   `names.json`; `python scripts/check_install_lines.py` enforces it in CI.
+5. Add a line to [CHANGELOG.md](CHANGELOG.md) under "Unreleased".
+
 ## The conformance bar
 
 Before opening a PR, all of these must pass:
 
 ```
 cd sf-smartfabric
-pip install -e ".[dev]"
+python -m pip install -e ".[dev]"
 python -m pytest                 # unit + live + registry + mTLS tests
 python -m sf_smartfabric vectors    # behavioural vectors (the protocol definition)
 python -m sf_smartfabric live       # live FAB-L-* over the wire (spawns a node)
 bash ports/conformance/run.sh    # cross-language interop (every present toolchain)
 ```
 
-CI runs the same on Python + Node + Java + C++ + C. If your change alters observable
+CI (`.github/workflows/ci.yml`) runs the same on Python 3.10-3.12, with every port whose toolchain the runner has. If your change alters observable
 behaviour, it must be reflected in `spec/vectors/*.json` **and** reproduced by every
 runnable port — otherwise it's a breaking protocol change and needs a version bump
 and a docs update (see below).
