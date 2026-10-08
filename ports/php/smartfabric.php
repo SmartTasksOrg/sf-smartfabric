@@ -68,7 +68,12 @@ function canon($v): string {
     if (is_int($v)) return (string)$v;
     if (is_float($v)) {
         if ($v == floor($v) && abs($v) < 1e15) return (string)(int)$v;
-        return rtrim(rtrim(sprintf('%.17g', $v), '0'), '.');
+        // Shortest round-trip form, like Python's repr and JavaScript's Number#toString
+        // (sprintf('%.17g') printed 0.05 as 0.050000000000000003).
+        $old = ini_set('serialize_precision', '-1');
+        $s = json_encode($v);
+        ini_set('serialize_precision', $old);
+        return $s;
     }
     if (is_array($v)) {
         $isList = array_keys($v) === range(0, count($v) - 1);
