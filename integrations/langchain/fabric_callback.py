@@ -5,7 +5,7 @@ reports it to a fabric node's pressure model. If the node escalates or denies,
 the callback surfaces that so the chain can stop — turning IAIso containment into
 a live guardrail around an agent, not just an after-the-fact audit.
 
-This targets a RUNNING node (smartfabric serve). It is a thin adapter: all the
+This targets a RUNNING node (sf-smartfabric serve). It is a thin adapter: all the
 containment logic lives in the node, not here.
 
     from smartfabric_langchain import FabricPressureCallback

@@ -3,9 +3,9 @@ import hashlib
 
 import pytest
 
-from smartfabric import vectors
-from smartfabric.models import CIRHeader, CIRMessage, CIRPolicy, InfluenceClass
-from smartfabric.wire import (
+from sf_smartfabric import vectors
+from sf_smartfabric.models import CIRHeader, CIRMessage, CIRPolicy, InfluenceClass
+from sf_smartfabric.wire import (
     canonical_json,
     decode,
     deframe,
@@ -126,7 +126,7 @@ def test_vectors_cover_all_families():
 
 def test_envelope_vector_sha_matches_recompute():
     # independent recompute of the sha for one envelope vector
-    from smartfabric.vectors import _load
+    from sf_smartfabric.vectors import _load
     case = _load("envelope.vectors.json")["cases"][0]
     msg = decode(case["message"])
     sha = "sha256:" + hashlib.sha256(encode(msg)).hexdigest()

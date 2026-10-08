@@ -1,4 +1,4 @@
-<!-- mcp-name: io.github.smarttasksorg/smartfabric · part of the Smart* family -->
+<!-- mcp-name: io.github.smarttasksorg/sf-smartfabric · part of the Smart* family -->
 <h1 align="center">🦔 SmartFabric</h1>
 <p align="center"><b>Carry IAIso containment across the whole fleet. One wire protocol, one node fingerprint — so many governed AI agents behave as one governed data fabric, not a pile of independently-wrapped agents.</b></p>
 <p align="center">
@@ -34,17 +34,17 @@ speak a common protocol.
 SmartFabric is not published on PyPI yet. Until this README says otherwise, a package called `smartfabric` on any registry is not ours.
 
 ```bash
-git clone https://github.com/SmartTasksOrg/smartfabric
-cd smartfabric
+git clone https://github.com/SmartTasksOrg/sf-smartfabric
+cd sf-smartfabric
 python -m venv .venv
 . .venv/bin/activate          # Windows PowerShell: .\.venv\Scripts\Activate.ps1
 python -m pip install .
-smartfabric --demo        # offline tour: pressure → fleet → conformance
+sf-smartfabric --demo        # offline tour: pressure → fleet → conformance
 ```
 
 ## What it does, in one screen
 
-`smartfabric --demo` runs three things against bundled synthetic data, no network:
+`sf-smartfabric --demo` runs three things against bundled synthetic data, no network:
 
 1. **Single-node pressure** — drives a token/tool workload up the `dp/dt` curve
    until it hits the release threshold and atomically resets (invariant 2:
@@ -59,9 +59,9 @@ smartfabric --demo        # offline tour: pressure → fleet → conformance
 | Where you work | How you run it |
 |---|---|
 | **Python** | from a clone: `python -m pip install .` (not on PyPI yet) |
-| **CLI (validate)** | `smartfabric validate <fp.json>` · `conformance <fp.json>` · `fleet <fleet.json>` |
-| **CLI (run a node)** | `smartfabric serve` runs a node · `smartfabric registry` runs the fleet registry · `smartfabric live` runs the `FAB-L-*` harness |
-| **Behavioural proof** | `smartfabric vectors` runs the pinned interop vectors; `ports/conformance/run.sh` runs them across Python + Node + Java |
+| **CLI (validate)** | `sf-smartfabric validate <fp.json>` · `conformance <fp.json>` · `fleet <fleet.json>` |
+| **CLI (run a node)** | `sf-smartfabric serve` runs a node · `sf-smartfabric registry` runs the fleet registry · `sf-smartfabric live` runs the `FAB-L-*` harness |
+| **Behavioural proof** | `sf-smartfabric vectors` runs the pinned interop vectors; `ports/conformance/run.sh` runs them across Python + Node + Java |
 | **Other languages** | independent ports in [`ports/`](ports/) (Node, Java runnable; Go, PHP, Rust shipped). The protocol is defined by `spec/vectors/*.json` — reproduce them and you're conformant |
 
 ## What's in this repo
@@ -72,7 +72,7 @@ smartfabric --demo        # offline tour: pressure → fleet → conformance
 - **The contract** — [`schema/fingerprint.schema.json`](schema/fingerprint.schema.json):
   the machine-readable descriptor every node publishes, plus a passing
   [`example.fingerprint.json`](schema/example.fingerprint.json).
-- **A runnable reference** — [`src/smartfabric/`](src/smartfabric/): the pressure
+- **A runnable reference** — [`src/sf_smartfabric/`](src/sf_smartfabric/): the pressure
   engine, fleet aggregation, CIR envelope + wire codec, the `FAB-*` conformance
   suite, a live HTTP/CIR **node** (`node.py`) with optional **mTLS** (`mtls.py`),
   an over-the-wire harness (`live.py`), and a **registry** (`registry.py`) for
@@ -123,9 +123,9 @@ family (SmartPangolin's `SEC-*`, SmartSeal's `SEAL-*`).
 ## Part of the Smart* family
 
 SmartFabric is the **fabric layer** of IAIso — the plane the other tools ride on.
-It stacks naturally with [SmartSeal](https://github.com/SmartTasksOrg/smartseal) (provenance
-records on the observability plane), [SmartRoute](https://github.com/SmartTasksOrg/smartroute)
-(trust-gated routing), and [SmartLLMCost](https://github.com/SmartTasksOrg/smartllmcost) (the
+It stacks naturally with [SmartSeal](https://github.com/SmartTasksOrg/sf-smartseal) (provenance
+records on the observability plane), [SmartRoute](https://github.com/SmartTasksOrg/sf-smartroute)
+(trust-gated routing), and [SmartLLMCost](https://github.com/SmartTasksOrg/sf-smartllmcost) (the
 resource-accounting record — characteristic #23). Everything conforms to the open
 **[IAIso standard](https://github.com/SmartTasksOrg/IAISO)** and bundles in
 **[SmartTasks.cloud](https://smarttasks.cloud)**.
@@ -142,7 +142,7 @@ running code:
   and an independent Node port ([`ports/node/`](ports/node/)) both pass the same
   vectors, byte-for-byte. `ports/conformance/run.sh` is the gate.
 - **Behavioural conformance** — [`spec/vectors/`](spec/vectors/) pins inputs →
-  outputs; `smartfabric vectors` runs them. Static `FAB-*` checks remain for what
+  outputs; `sf-smartfabric vectors` runs them. Static `FAB-*` checks remain for what
   a node *declares*.
 
 Still honest about what's next: a live network harness against a running node,

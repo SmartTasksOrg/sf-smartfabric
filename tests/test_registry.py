@@ -9,9 +9,9 @@ import urllib.request
 
 import pytest
 
-from smartfabric.fingerprint import load_schema
-from smartfabric.node import FabricNode, serve_in_thread as serve_node
-from smartfabric.registry import (
+from sf_smartfabric.fingerprint import load_schema
+from sf_smartfabric.node import FabricNode, serve_in_thread as serve_node
+from sf_smartfabric.registry import (
     FabricRegistry,
     register_with,
     serve_in_thread as serve_registry,
@@ -89,8 +89,8 @@ def test_fleet_aggregates_over_live_nodes():
 
 
 def _post_invoke(node_url):
-    from smartfabric.models import CIRHeader, CIRMessage
-    from smartfabric.wire import encode
+    from sf_smartfabric.models import CIRHeader, CIRMessage
+    from sf_smartfabric.wire import encode
     msg = CIRMessage(
         header=CIRHeader(id="01REGTESTINVOKE00000000001", verb="invoke", verb_version="0.1",
                          from_addr="iaiso://t@local/x", to_addr="iaiso://n@local/y"),

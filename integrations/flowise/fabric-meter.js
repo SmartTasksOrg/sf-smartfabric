@@ -1,6 +1,6 @@
 // SmartFabric / IFP meter for Flowise (Custom Tool / Custom Function).
 //
-// Reports a metered call to a running fabric node (smartfabric serve) and returns
+// Reports a metered call to a running fabric node (sf-smartfabric serve) and returns
 // the pressure verdict, so a Flowise agent can be gated by IAIso containment.
 
 const NODE_URL = process.env.SMARTFABRIC_NODE_URL || 'http://127.0.0.1:8770';

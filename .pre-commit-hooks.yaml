@@ -1,12 +1,12 @@
 - id: smartfabric-validate
   name: SmartFabric fingerprint validate
   description: Schema-validate IAIso node fingerprints before commit.
-  entry: smartfabric validate
+  entry: sf-smartfabric validate
   language: python
   files: '\.fingerprint\.json$'
 - id: smartfabric-conformance
   name: SmartFabric conformance
   description: Run the FAB-* conformance suite over changed fingerprints.
-  entry: smartfabric conformance
+  entry: sf-smartfabric conformance
   language: python
   files: '\.fingerprint\.json$'

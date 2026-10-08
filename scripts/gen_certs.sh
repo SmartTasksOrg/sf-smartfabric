@@ -41,4 +41,4 @@ echo "wrote to $(pwd):"
 ls -1 *.crt *.key
 echo ""
 echo "start an mTLS node:"
-echo "  smartfabric serve --tls-cert $OUT/server.crt --tls-key $OUT/server.key --tls-ca $OUT/ca.crt"
+echo "  sf-smartfabric serve --tls-cert $OUT/server.crt --tls-key $OUT/server.key --tls-ca $OUT/ca.crt"

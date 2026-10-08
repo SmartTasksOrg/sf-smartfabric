@@ -30,7 +30,7 @@ resource "google_compute_instance" "fabric_node" {
   metadata = {
     user-data = file("${path.module}/cloud-init.yaml")
   }
-  tags = ["smartfabric"]
+  tags = ["sf-smartfabric"]
 }
 
 resource "google_compute_firewall" "fabric" {
@@ -39,7 +39,7 @@ resource "google_compute_firewall" "fabric" {
   allow { protocol = "tcp", ports = ["8770"] }
   # NOTE: 0.0.0.0/0 is for demo reachability. Restrict this in production.
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["smartfabric"]
+  target_tags   = ["sf-smartfabric"]
 }
 
 output "node_ip" {

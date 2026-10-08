@@ -11,7 +11,7 @@ auditors, and SREs who run many IAIso-governed AI agents/tools as one fleet.
 provenance — because governance is a property of the whole system, and only a
 common wire protocol can express it.
 
-**Proof it's real on clone:** `git clone https://github.com/SmartTasksOrg/smartfabric && cd smartfabric && python -m pip install . && smartfabric --demo`
+**Proof it's real on clone:** `git clone https://github.com/SmartTasksOrg/sf-smartfabric && cd sf-smartfabric && python -m pip install . && sf-smartfabric --demo`
 runs the pressure model to release, computes fleet pressure, and prints a
 `FAB-*` conformance report — all offline.
 

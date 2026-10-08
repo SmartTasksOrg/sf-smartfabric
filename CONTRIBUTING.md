@@ -10,11 +10,11 @@ implementation reproducing every vector, byte-for-byte.**
 Before opening a PR, all of these must pass:
 
 ```
-cd smartfabric
+cd sf-smartfabric
 pip install -e ".[dev]"
 python -m pytest                 # unit + live + registry + mTLS tests
-python -m smartfabric vectors    # behavioural vectors (the protocol definition)
-python -m smartfabric live       # live FAB-L-* over the wire (spawns a node)
+python -m sf_smartfabric vectors    # behavioural vectors (the protocol definition)
+python -m sf_smartfabric live       # live FAB-L-* over the wire (spawns a node)
 bash ports/conformance/run.sh    # cross-language interop (every present toolchain)
 ```
 

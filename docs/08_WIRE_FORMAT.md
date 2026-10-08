@@ -39,7 +39,7 @@ and cross-language equality. The rules:
    languages can never break envelope interop.
 7. **Strings** — standard JSON string escaping (RFC 8259).
 
-The reference encoder is [`src/smartfabric/wire.py`](../src/smartfabric/wire.py)
+The reference encoder is [`src/sf_smartfabric/wire.py`](../src/sf_smartfabric/wire.py)
 (`encode`/`decode`); the independent Node encoder is
 [`ports/node/lib/wire.mjs`](../ports/node/lib/wire.mjs). Both are checked
 byte-for-byte against `spec/vectors/envelope.vectors.json`.

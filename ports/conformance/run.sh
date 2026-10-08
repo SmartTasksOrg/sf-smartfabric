@@ -16,7 +16,7 @@
 #
 # Exit 0 iff every present implementation passes every vector.
 set -uo pipefail
-cd "$(dirname "$0")/../.."   # -> smartfabric/
+cd "$(dirname "$0")/../.."   # -> sf-smartfabric/
 VEC="spec/vectors"
 rc=0
 
@@ -28,7 +28,7 @@ run_lang () { # name  test-command...
 }
 
 echo "== Python reference =="
-python3 -m smartfabric vectors || rc=1
+python3 -m sf_smartfabric vectors || rc=1
 
 if command -v node >/dev/null 2>&1; then
   run_lang "Node port"  node ports/node/bin/vectors.mjs

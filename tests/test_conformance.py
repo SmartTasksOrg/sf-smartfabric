@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from smartfabric import conformance
-from smartfabric.conformance import Level, Result
+from sf_smartfabric import conformance
+from sf_smartfabric.conformance import Level, Result
 
 EXAMPLE = Path(__file__).resolve().parents[1] / "schema" / "example.fingerprint.json"
 

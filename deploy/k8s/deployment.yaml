@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: node
-          image: ghcr.io/smarttasksorg/smartfabric:latest   # publish this first
+          image: ghcr.io/smarttasksorg/sf-smartfabric:latest   # publish this first
           args: ["serve", "--host", "0.0.0.0", "--port", "8770"]
           ports:
             - containerPort: 8770
