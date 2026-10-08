@@ -1,13 +1,21 @@
 {
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.smarttasksorg/smartfabric",
   "description": "IAIso Fabric Protocol (IFP) — carry & enforce IAIso containment across a fleet of governed AI nodes.",
   "version": "0.5.0",
   "homepage": "https://iaiso.org",
   "repository": "https://github.com/SmartTasksOrg/smartfabric",
   "license": "See LICENSE (Community Forking v2.0, aligned with IAIso)",
-  "packages": {
-    "pypi": "smartfabric"
-  },
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "smartfabric",
+      "version": "0.5.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ],
   "entrypoints": {
     "cli": "smartfabric",
     "demo": "smartfabric --demo"

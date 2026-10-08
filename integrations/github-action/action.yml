@@ -13,6 +13,10 @@ inputs:
     description: "Minimum severity that fails the build: error | warning."
     required: false
     default: "error"
+  package:
+    description: "Optional pip requirement or path to install instead. Leave empty (the default) to install the copy of SmartFabric this action was taken from, at the ref the workflow names, so nothing is fetched from a package index by name."
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -21,13 +25,28 @@ runs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.11"
-    - name: Install smartfabric
+    - name: Install SmartFabric from this action's own repository
       shell: bash
-      run: pip install smartfabric
+      env:
+        PKG: ${{ inputs.package }}
+      run: |
+        # Never install by name: "smartfabric" is not published on PyPI by the
+        # maintainers yet, so a package of that name is not ours.
+        if [ -z "$PKG" ]; then
+          PKG="$GITHUB_ACTION_PATH/../.."
+          if [ ! -f "$PKG/pyproject.toml" ]; then
+            echo "SmartFabric source not found next to the action ($PKG); set the 'package' input" >&2
+            exit 1
+          fi
+        fi
+        python -m pip install --quiet "$PKG"
     - name: Run static conformance (FAB-*) on the fingerprint
       shell: bash
+      env:
+        FINGERPRINT: ${{ inputs.fingerprint }}
+        FAIL_ON: ${{ inputs.fail-on }}
       run: |
-        smartfabric check "${{ inputs.fingerprint }}" --fail-on "${{ inputs.fail-on }}"
+        smartfabric check "$FINGERPRINT" --fail-on "$FAIL_ON"
     - name: Run behavioral vectors
       shell: bash
       run: smartfabric vectors
