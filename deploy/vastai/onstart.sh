@@ -16,6 +16,6 @@ if command -v sf-smartfabric >/dev/null 2>&1; then
   exec sf-smartfabric serve --host 0.0.0.0 --port "$PORT"
 fi
 # Otherwise install from the repository at a fixed commit and run (for a generic CUDA/python base image).
-# pinned to a commit: sf-smartfabric is not on PyPI yet; replace with a release tag
-pip install --no-cache-dir "git+https://github.com/SmartTasksOrg/sf-smartfabric@e0d9eb95ec011678c183ac2b9ace2d2fa461b217"
+# pinned to the release tag v0.5.0 (it exists after the first release); sf-smartfabric is not on PyPI yet
+pip install --no-cache-dir "git+https://github.com/SmartTasksOrg/sf-smartfabric@v0.5.0"
 exec sf-smartfabric serve --host 0.0.0.0 --port "$PORT"

@@ -5,7 +5,7 @@ app = "smartfabric-node"
 primary_region = "iad"
 
 [build]
-  image = "ghcr.io/smarttasksorg/sf-smartfabric:latest"   # or build from ../Dockerfile
+  image = "ghcr.io/smarttasksorg/sf-smartfabric:0.5.0"   # or build from ../Dockerfile
 
 [[services]]
   internal_port = 8770

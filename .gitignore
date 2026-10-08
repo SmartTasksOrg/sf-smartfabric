@@ -11,3 +11,33 @@ dist/
 .env
 .secure/
 .venv-iaiso/
+
+# build output
+venv/
+
+# secrets and credentials never belong in the repository
+.secret/
+secrets.env
+*.env
+.env.*
+!.env.example
+.npmrc
+.pypirc
+.netrc
+_netrc
+id_rsa*
+id_ed25519*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# port build output
+*.class
+ports/rust/target/
+ports/rust/Cargo.lock
+ports/csharp/bin/
+ports/csharp/obj/
+
+# binary from `go build` in ports/go (the module path ends in /go)
+ports/go/go

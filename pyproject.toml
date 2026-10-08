@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -14,11 +14,12 @@ authors = [
 ]
 keywords = ["iaiso", "ai-safety", "governance", "fabric", "protocol", "containment", "provenance"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
-  "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3",
-  "Topic :: Security",
-  "Topic :: System :: Networking",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
 ]
 dependencies = [
   "jsonschema>=4.0",
@@ -30,6 +31,9 @@ dev = ["pytest>=7", "pytest-cov", "ruff", "mypy"]
 [project.urls]
 Homepage = "https://iaiso.org"
 Source = "https://github.com/SmartTasksOrg/sf-smartfabric"
+Issues = "https://github.com/SmartTasksOrg/sf-smartfabric/issues"
+Security = "https://github.com/SmartTasksOrg/sf-smartfabric/security/policy"
+Changelog = "https://github.com/SmartTasksOrg/sf-smartfabric/blob/master/CHANGELOG.md"
 Standard = "https://github.com/SmartTasksOrg/IAISO"
 Cloud = "https://smarttasks.cloud"
 

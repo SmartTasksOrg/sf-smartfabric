@@ -13,7 +13,7 @@ sit right next to the thing being governed, with no extra network hop.
 ## Two ways to run it
 
 **A. Use the published image.**
-- Image: `ghcr.io/smarttasksorg/sf-smartfabric:latest`
+- Image: `ghcr.io/smarttasksorg/sf-smartfabric:0.5.0`
 - On-start: `sf-smartfabric serve --host 0.0.0.0 --port 8770`
 - Open port 8770 in the instance's port mappings (vast maps a public port to it).
 
