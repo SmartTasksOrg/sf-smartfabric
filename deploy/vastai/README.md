@@ -13,20 +13,20 @@ sit right next to the thing being governed, with no extra network hop.
 ## Two ways to run it
 
 **A. Use the published image.**
-- Image: `ghcr.io/smarttasksorg/smartfabric:latest`
-- On-start: `smartfabric serve --host 0.0.0.0 --port 8770`
+- Image: `ghcr.io/smarttasksorg/sf-smartfabric:0.5.0`
+- On-start: `sf-smartfabric serve --host 0.0.0.0 --port 8770`
 - Open port 8770 in the instance's port mappings (vast maps a public port to it).
 
 **B. Use a CUDA base image you already run** (e.g. your model server) and add the
 node as a sidecar process — paste `onstart.sh` into the on-start field; it installs
-`smartfabric` from PyPI if it isn't already present and runs the node.
+`sf-smartfabric` from PyPI if it isn't already present and runs the node.
 
 ## Verify
 
 From your machine, against the public host:port vast assigned:
 
 ```
-smartfabric live --url http://<public-host>:<mapped-port>
+sf-smartfabric live --url http://<public-host>:<mapped-port>
 ```
 
 ## Honest scope

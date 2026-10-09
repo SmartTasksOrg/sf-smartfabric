@@ -12,8 +12,8 @@ Build once, deploy anywhere:
 docker build -f deploy/Dockerfile -t smartfabric-node .
 ```
 
-The image runs `smartfabric serve`. The same image runs the registry
-(`smartfabric registry`) — it's one package. Publish it (see
+The image runs `sf-smartfabric serve`. The same image runs the registry
+(`sf-smartfabric registry`) — it's one package. Publish it (see
 `private/release/` in the source repo) and point any target at the tag.
 
 | Target | Files | Notes |
@@ -41,7 +41,7 @@ docker run -p 8770:8770 smartfabric-node
 docker compose -f deploy/docker-compose.yml up --build
 
 # verify any running node
-smartfabric live --url http://localhost:8770
+sf-smartfabric live --url http://localhost:8770
 ```
 
 ## 10.3 Kubernetes and Helm
@@ -51,7 +51,7 @@ probes. The Helm chart parameterises replica count, image, and mTLS:
 
 ```
 helm install fabric deploy/helm \
-  --set image.repository=ghcr.io/youorg/smartfabric \
+  --set image.repository=ghcr.io/youorg/sf-smartfabric \
   --set replicaCount=3 \
   --set mtls.enabled=true \
   --set mtls.secretName=smartfabric-certs
@@ -68,8 +68,8 @@ where the compute is, so pressure, consent-gating, and halt enforcement sit next
 the thing being governed with no extra hop.
 
 Both providers are image-based: give them
-`ghcr.io/<org>/smartfabric:latest` and the command `serve --host 0.0.0.0 --port 8770`,
-expose the port, and verify with `smartfabric live --url <provider-url>`.
+`ghcr.io/<org>/sf-smartfabric:0.5.0` and the command `serve --host 0.0.0.0 --port 8770`,
+expose the port, and verify with `sf-smartfabric live --url <provider-url>`.
 `deploy/vastai/onstart.sh` also handles the case where you're adding the node as a
 sidecar to a CUDA base image you already run (it installs the package from PyPI if
 needed).

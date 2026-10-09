@@ -6,7 +6,7 @@ Fastest path (single node):
 2. Paste `user-data.sh` into **Advanced details → User data**.
 3. Security group: allow inbound TCP **8770** (restrict the source CIDR — don't
    leave it 0.0.0.0/0 in production).
-4. `smartfabric live --url http://<public-ip>:8770` to verify.
+4. `sf-smartfabric live --url http://<public-ip>:8770` to verify.
 
 For more than a demo: put the node behind an ALB with ACM TLS, run it as an ECS
 service, and add the registry/mTLS fabric services (docs/04). The container image

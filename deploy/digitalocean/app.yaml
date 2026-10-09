@@ -6,9 +6,9 @@ services:
     image:
       registry_type: GHCR
       registry: smarttasksorg
-      repository: smartfabric
+      repository: sf-smartfabric
       tag: latest
-    run_command: smartfabric serve --host 0.0.0.0 --port 8770
+    run_command: sf-smartfabric serve --host 0.0.0.0 --port 8770
     http_port: 8770
     health_check:
       http_path: /health

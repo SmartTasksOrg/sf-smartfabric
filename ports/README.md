@@ -12,7 +12,7 @@ shipped for full-family breadth.
 
 | Port | Language | Verified in CI here | How to run |
 | --- | --- | --- | --- |
-| reference | Python | ✅ verified | `python3 -m smartfabric vectors` |
+| reference | Python | ✅ verified | `python3 -m sf_smartfabric vectors` |
 | node | Node.js | ✅ verified | `node ports/node/bin/vectors.mjs` |
 | java | Java 21 | ✅ verified | `cd ports/java && java src/SmartFabric.java ../../spec/vectors` |
 | cpp | C++17 | ✅ verified | `cd ports/cpp && g++ -O2 -std=c++17 smartfabric.cpp -o sf && ./sf ../../spec/vectors` |

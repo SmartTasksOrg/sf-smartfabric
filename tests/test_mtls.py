@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from smartfabric.models import CIRHeader, CIRMessage
+from sf_smartfabric.models import CIRHeader, CIRMessage
 
 
 def _describe():
@@ -28,8 +28,8 @@ def certs(tmp_path_factory):
 
 
 def test_mtls_requires_client_cert(certs):
-    from smartfabric.mtls import server_ssl_context, client_ssl_context, mtls_post
-    from smartfabric.node import serve_in_thread
+    from sf_smartfabric.mtls import server_ssl_context, client_ssl_context, mtls_post
+    from sf_smartfabric.node import serve_in_thread
 
     sctx = server_ssl_context(str(certs / "server.crt"), str(certs / "server.key"),
                               str(certs / "ca.crt"), require_client_cert=True)

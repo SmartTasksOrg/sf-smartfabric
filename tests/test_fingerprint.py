@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from smartfabric import fingerprint as fp
+from sf_smartfabric import fingerprint as fp
 
 EXAMPLE = Path(__file__).resolve().parents[1] / "schema" / "example.fingerprint.json"
 

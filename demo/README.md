@@ -5,7 +5,7 @@ package (`schema/example.fingerprint.json`, `examples/fleet.example.json`) so it
 works the second you clone:
 
 ```bash
-smartfabric --demo
+sf-smartfabric --demo
 ```
 
 It runs three stages offline — single-node pressure to atomic release, fleet

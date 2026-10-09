@@ -2,6 +2,26 @@
 
 All notable changes to SmartFabric (the IAIso Fabric Protocol reference).
 
+## Unreleased
+
+### Security
+- Install instructions no longer name packages the maintainers have not
+  published. Until the first release, install from a clone (README, "Install").
+- New `SECURITY.md` (private vulnerability reporting), `names.json` (the only
+  official package names) and a CI check that fails when a document names any
+  other package.
+- Releases are built and published only by `.github/workflows/release.yml`
+  through PyPI trusted publishing, with provenance attestations.
+
+### Changed
+- **Renamed (breaking), `sf-` = Smart Family:** repository `SmartTasksOrg/sf-smartfabric`, PyPI package `sf-smartfabric`, command `sf-smartfabric`, import package `sf_smartfabric`, MCP server `io.github.smarttasksorg/sf-smartfabric`. The unprefixed names are not used any more, so nobody can be sent to a look-alike.
+- README: "Install" and "Status" sections; the old Status (v0.2.0) is replaced by the current state of 0.5.0.
+- `pyproject.toml`: setuptools 77+, "3 - Alpha" classifier, Source/Issues/Security/Changelog URLs (licence unchanged).
+- Deploy configs reference the image tag `0.5.0` instead of `latest`; the image is not published yet.
+- Node port package `sf-smartfabric` (unpublished); Go module path `github.com/SmartTasksOrg/sf-smartfabric/ports/go`.
+- The composite GitHub Action pins `actions/setup-python` by commit.
+- `MARKETING.md` moved out of the public repository.
+
 ## [0.5.0] — 2026-08-17 · the registry, and docs that match the code
 Adds the fabric registry (the last core service that was described but unbuilt),
 and brings the documentation fully in sync with the shipped implementation.

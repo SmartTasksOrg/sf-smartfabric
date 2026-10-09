@@ -1,7 +1,7 @@
 # integrations/ — adapters for AI toolchains
 
 Thin adapters that connect popular agent/LLM toolchains to a **running fabric
-node** (`smartfabric serve`). They meter a call (tokens, tool invocations) and
+node** (`sf-smartfabric serve`). They meter a call (tokens, tool invocations) and
 report it to the node, which applies the IAIso pressure model and returns a
 verdict — so containment becomes a *live guardrail* around an agent, not just an
 after-the-fact audit.
@@ -22,7 +22,7 @@ relays. That keeps every integration consistent with the protocol by constructio
 All the runtime adapters (LangChain, n8n, Flowise) target a node service:
 
 ```
-smartfabric serve --port 8770
+sf-smartfabric serve --port 8770
 ```
 
 Point the adapter at it with `SMARTFABRIC_NODE_URL` (and a `SMARTFABRIC_CONSENT_TOKEN`

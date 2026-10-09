@@ -58,7 +58,7 @@ def parse_address(addr: str) -> Address:
 def _schema_text() -> str:
     """Load the packaged fingerprint schema (works installed or from source)."""
     try:
-        return (resources.files("smartfabric") / "schema" / "fingerprint.schema.json").read_text()
+        return (resources.files("sf-smartfabric") / "schema" / "fingerprint.schema.json").read_text()
     except (ModuleNotFoundError, FileNotFoundError, AttributeError):
         # source layout fallback: <repo>/schema/fingerprint.schema.json
         here = Path(__file__).resolve()

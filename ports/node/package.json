@@ -1,5 +1,5 @@
 {
-  "name": "@smarttasksorg/smartfabric",
+  "name": "sf-smartfabric",
   "version": "0.2.0",
   "description": "Node.js port of the IAIso Fabric Protocol (IFP) reference — pressure engine, fleet aggregation, canonical-JSON wire format.",
   "type": "module",
@@ -8,11 +8,23 @@
     "./wire": "./lib/wire.mjs"
   },
   "bin": {
-    "smartfabric-vectors": "./bin/vectors.mjs"
+    "sf-smartfabric-vectors": "./bin/vectors.mjs"
   },
   "scripts": {
     "test": "node bin/vectors.mjs"
   },
   "license": "SEE LICENSE IN ../../LICENSE",
-  "repository": "https://github.com/SmartTasksOrg/smartfabric"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmartTasksOrg/sf-smartfabric.git",
+    "directory": "ports/node"
+  },
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }
