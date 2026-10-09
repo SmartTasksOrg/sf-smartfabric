@@ -2,7 +2,7 @@
   "//": "RunPod pod template for a SmartFabric node (GPU host, docker-image based).",
   "//2": "Import via the RunPod API/console. Publish the image first.",
   "name": "smartfabric-node",
-  "imageName": "ghcr.io/smarttasksorg/smartfabric:latest",
+  "imageName": "ghcr.io/smarttasksorg/sf-smartfabric:0.5.0",
   "dockerArgs": "serve --host 0.0.0.0 --port 8770",
   "ports": "8770/http",
   "containerDiskInGb": 5,

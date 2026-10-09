@@ -4,10 +4,10 @@ import urllib.request
 
 import pytest
 
-from smartfabric import live
-from smartfabric.models import CIRHeader, CIRMessage
-from smartfabric.node import FabricNode, serve_in_thread
-from smartfabric.wire import decode, encode
+from sf_smartfabric import live
+from sf_smartfabric.models import CIRHeader, CIRMessage
+from sf_smartfabric.node import FabricNode, serve_in_thread
+from sf_smartfabric.wire import decode, encode
 
 
 @pytest.fixture

@@ -1,23 +1,24 @@
 {
   "schema": 1,
-  "repo": "SmartTasksOrg/smartfabric",
+  "repo": "SmartTasksOrg/sf-smartfabric",
   "checked_on": "2026-10-08",
   "names": [
     {
       "registry": "pypi",
-      "name": "smartfabric",
+      "name": "sf-smartfabric",
       "registered": false,
       "workflow": "release.yml",
       "note": "first release pending; README in state A"
     },
     {
-      "registry": "npm",
-      "name": "@smarttasksorg/smartfabric",
-      "registered": false
+      "registry": "pypi",
+      "name": "smartfabric",
+      "registered": false,
+      "note": "not used by the family: packages are published as sf-<name>; never install this name"
     },
     {
       "registry": "npm",
-      "name": "@smarttasks/smartfabric",
+      "name": "sf-smartfabric",
       "registered": false
     },
     {
@@ -27,12 +28,17 @@
     },
     {
       "registry": "ghcr",
-      "name": "ghcr.io/smarttasksorg/smartfabric",
+      "name": "ghcr.io/smarttasksorg/sf-smartfabric",
       "registered": false
     },
     {
       "registry": "mcp",
-      "name": "io.github.smarttasksorg/smartfabric",
+      "name": "io.github.smarttasksorg/sf-smartfabric",
+      "registered": false
+    },
+    {
+      "registry": "go",
+      "name": "github.com/SmartTasksOrg/sf-smartfabric/ports/go",
       "registered": false
     }
   ],

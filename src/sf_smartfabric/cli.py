@@ -1,10 +1,10 @@
 """Command-line entry point for SmartFabric.
 
-    smartfabric --demo                 # offline tour (works the second you clone)
-    smartfabric --version
-    smartfabric validate <fp.json>     # schema-validate a node fingerprint
-    smartfabric conformance <fp.json>  # run the FAB-* suite, print/emit a report
-    smartfabric fleet <fleet.json>     # compute topology-weighted fleet pressure
+    sf-smartfabric --demo                 # offline tour (works the second you clone)
+    sf-smartfabric --version
+    sf-smartfabric validate <fp.json>     # schema-validate a node fingerprint
+    sf-smartfabric conformance <fp.json>  # run the FAB-* suite, print/emit a report
+    sf-smartfabric fleet <fleet.json>     # compute topology-weighted fleet pressure
 """
 from __future__ import annotations
 
@@ -91,7 +91,7 @@ def _cmd_serve(args: argparse.Namespace) -> int:
     addr = server.server_address
     mode = "mTLS" if (ctx is not None and args.tls_ca and not args.no_client_cert) else \
            ("TLS" if ctx is not None else "plaintext")
-    print(f"smartfabric node listening on {scheme}://{addr[0]}:{addr[1]}  ({mode}; POST CIR to /cir)")
+    print(f"sf-smartfabric node listening on {scheme}://{addr[0]}:{addr[1]}  ({mode}; POST CIR to /cir)")
     print(f"node identity: {node.fingerprint['identity']['address']}")
     try:
         server.serve_forever()
@@ -130,7 +130,7 @@ def _cmd_registry(args: argparse.Namespace) -> int:
         scheme = "https"
     server, reg = serve(host=args.host, port=args.port, ssl_context=ctx)
     addr = server.server_address
-    print(f"smartfabric registry on {scheme}://{addr[0]}:{addr[1]}  "
+    print(f"sf-smartfabric registry on {scheme}://{addr[0]}:{addr[1]}  "
           f"(POST /register /heartbeat /deregister; GET /nodes /fleet)")
     try:
         server.serve_forever()
@@ -142,10 +142,10 @@ def _cmd_registry(args: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="smartfabric",
+        prog="sf-smartfabric",
         description="IAIso Fabric Protocol (IFP) reference tools.",
     )
-    p.add_argument("--version", action="version", version=f"smartfabric {__version__}")
+    p.add_argument("--version", action="version", version=f"sf-smartfabric {__version__}")
     p.add_argument("--demo", action="store_true", help="run the offline demo and exit")
 
     sub = p.add_subparsers(dest="command")

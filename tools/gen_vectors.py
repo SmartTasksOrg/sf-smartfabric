@@ -13,8 +13,8 @@ import hashlib
 import json
 from pathlib import Path
 
-from smartfabric.pressure import NodeSample, PressureConfig, PressureEngine, fleet_pressure
-from smartfabric.wire import encode, frame_message, decode
+from sf_smartfabric.pressure import NodeSample, PressureConfig, PressureEngine, fleet_pressure
+from sf_smartfabric.wire import encode, frame_message, decode
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "spec" / "vectors"

@@ -44,7 +44,7 @@ def _load(name: str) -> Any:
     """Load a bundled vector file from spec/vectors/ (source or installed)."""
     parts = ("spec", "vectors", name)
     try:
-        ref = resources.files("smartfabric")
+        ref = resources.files("sf-smartfabric")
         for p in parts:
             ref = ref / p
         return json.loads(ref.read_text())

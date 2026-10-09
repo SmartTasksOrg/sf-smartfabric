@@ -1,9 +1,9 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "smartfabric"
+name = "sf-smartfabric"
 version = "0.5.0"
 description = "IAIso Fabric Protocol (IFP) — carry & enforce IAIso containment across a fleet of governed AI nodes."
 readme = "README.md"
@@ -14,11 +14,12 @@ authors = [
 ]
 keywords = ["iaiso", "ai-safety", "governance", "fabric", "protocol", "containment", "provenance"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
-  "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3",
-  "Topic :: Security",
-  "Topic :: System :: Networking",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
 ]
 dependencies = [
   "jsonschema>=4.0",
@@ -29,12 +30,15 @@ dev = ["pytest>=7", "pytest-cov", "ruff", "mypy"]
 
 [project.urls]
 Homepage = "https://iaiso.org"
-Source = "https://github.com/SmartTasksOrg/smartfabric"
+Source = "https://github.com/SmartTasksOrg/sf-smartfabric"
+Issues = "https://github.com/SmartTasksOrg/sf-smartfabric/issues"
+Security = "https://github.com/SmartTasksOrg/sf-smartfabric/security/policy"
+Changelog = "https://github.com/SmartTasksOrg/sf-smartfabric/blob/master/CHANGELOG.md"
 Standard = "https://github.com/SmartTasksOrg/IAISO"
 Cloud = "https://smarttasks.cloud"
 
 [project.scripts]
-smartfabric = "smartfabric.cli:main"
+sf-smartfabric = "sf_smartfabric.cli:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
@@ -43,7 +47,7 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.setuptools.package-data]
-smartfabric = ["py.typed"]
+sf_smartfabric = ["py.typed"]
 # The normative schema/ and examples/ live at the repo root (spec-first layout,
 # like the rest of the Smart* family). The library resolves them from the source
 # tree; a packaging step that vendors them into the wheel is tracked in

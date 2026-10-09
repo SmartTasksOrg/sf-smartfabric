@@ -29,8 +29,8 @@ jobs:
         run: python -m pip install -e ".[dev]"
       - name: Tests
         run: python -m pytest -q
-      - run: python -m smartfabric --demo
-      - run: python -m smartfabric vectors
+      - run: python -m sf_smartfabric --demo
+      - run: python -m sf_smartfabric vectors
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0, read 2026-10-08
         with:
           node-version: '22'
@@ -39,7 +39,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Live FAB-L-* harness over the wire (in-process node)
-        run: python -m smartfabric live
+        run: python -m sf_smartfabric live
       - name: Cross-language conformance (every port whose toolchain the runner has must agree)
         run: bash ports/conformance/run.sh
 

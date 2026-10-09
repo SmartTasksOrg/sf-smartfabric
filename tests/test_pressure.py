@@ -1,7 +1,7 @@
 """Pressure model tests — determinism, thresholds, release/lock, fleet."""
 import pytest
 
-from smartfabric import (
+from sf_smartfabric import (
     NodeSample,
     PressureConfig,
     PressureEngine,

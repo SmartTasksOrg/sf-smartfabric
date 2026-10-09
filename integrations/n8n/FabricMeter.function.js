@@ -1,7 +1,7 @@
 // SmartFabric / IFP meter for n8n (Function node).
 //
 // Drop this into an n8n Function node placed after any AI/LLM node. It reports
-// the call to a running fabric node (smartfabric serve) and passes the pressure
+// the call to a running fabric node (sf-smartfabric serve) and passes the pressure
 // verdict downstream, so a workflow can branch/stop on escalation.
 //
 // Set via n8n environment variables SMARTFABRIC_NODE_URL / SMARTFABRIC_CONSENT_TOKEN.

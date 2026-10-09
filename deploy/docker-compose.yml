@@ -24,4 +24,4 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
     depends_on: [node-a]
-    entrypoint: ["sh", "-c", "sleep 3 && smartfabric live --url http://node-a:8770"]
+    entrypoint: ["sh", "-c", "sleep 3 && sf-smartfabric live --url http://node-a:8770"]
