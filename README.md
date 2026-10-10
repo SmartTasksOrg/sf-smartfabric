@@ -33,11 +33,23 @@ speak a common protocol.
 
 ## Install
 
-SmartFabric is not published on PyPI or any other package registry yet. Until
-this section says otherwise, a package called `sf-smartfabric` on any registry
-is not ours, and neither is `smartfabric`.
+```bash
+python -m pip install sf-smartfabric
+sf-smartfabric --demo
+```
 
-Install from a clone (Python 3.10 or later):
+Every file of `sf-smartfabric` on PyPI is built and published by this repository's release
+workflow (`.github/workflows/release.yml`, PyPI trusted publishing) and carries a
+provenance attestation that names this repository and that workflow; PyPI shows
+it under "Verified details". The same workflow records a GitHub attestation for
+the same files, which you can check with
+`gh attestation verify <file> --repo SmartTasksOrg/sf-smartfabric`. A release file without
+that provenance is not ours, and neither is a package called `smartfabric` (without
+`sf-`) on any registry.
+
+Version 0.5.0 (published 2026-10-09) was the first release under this name; use 0.5.1 or later, which ships the schema, examples and vectors the demo, `vectors` and `validate` read (0.5.0 needed a clone for them).
+
+To install from a clone instead (Python 3.10 or later):
 
 ```bash
 git clone https://github.com/SmartTasksOrg/sf-smartfabric
@@ -50,9 +62,9 @@ sf-smartfabric --demo
 
 ## Status
 
-- **Version 0.5.0, experimental.** The reference implementation of the IAIso Fabric Protocol (IFP), version 0.5.0, with a frozen wire format and ports in nine other languages that reproduce the same behavioural vectors.
-- **Published:** nowhere yet; install from a clone (above).
-- **Tested:** on Python 3.10, 3.11 and 3.12 (Linux): the 59 tests, the demo, the behavioural vectors, the live `FAB-L-*` harness against an in-process node, and `ports/conformance/run.sh` across every port whose toolchain the runner has, on every push to master and every pull request (`.github/workflows/ci.yml`).
+- **Version 0.5.1, experimental.** The reference implementation of the IAIso Fabric Protocol (IFP), version 0.5.0, with a frozen wire format and ports in nine other languages that reproduce the same behavioural vectors.
+- **Published:** PyPI `sf-smartfabric` (see Install). Nothing else is published.
+- **Tested:** on Python 3.10, 3.11 and 3.12 (Linux): the 74 tests, the demo, the behavioural vectors, the live `FAB-L-*` harness against an in-process node, and `ports/conformance/run.sh` across every port whose toolchain the runner has, on every push to master and every pull request (`.github/workflows/ci.yml`), and the built wheel installed in a clean environment runs the demo, the vectors and `validate` from an empty folder (the `wheel` job).
 - **Not tested:** Windows and macOS; Protobuf binary interop (field numbers are frozen, not exercised without `protoc`); ed25519 report signing (not implemented yet: a content digest stands in for the signature).
 - **Ports:** Node, Java, C, C++, Go, PHP, Rust, Ruby and C# ports in `ports/` reproduce the Python reference's vectors (`ports/conformance/run.sh`, run in CI); none is published on a registry.
 - **Protocol:** a frozen wire format (canonical-JSON encoding + LEB128 framing and a field-number-frozen `proto/fabric.proto`, see [`docs/08_WIRE_FORMAT.md`](docs/08_WIRE_FORMAT.md)) and behavioural conformance ([`spec/vectors/`](spec/vectors/) pins inputs to outputs; `sf-smartfabric vectors` runs them). Static `FAB-*` checks remain for what a node *declares*.

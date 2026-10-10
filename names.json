@@ -1,14 +1,14 @@
 {
   "schema": 1,
   "repo": "SmartTasksOrg/sf-smartfabric",
-  "checked_on": "2026-10-08",
+  "checked_on": "2026-10-09",
   "names": [
     {
       "registry": "pypi",
       "name": "sf-smartfabric",
-      "registered": false,
+      "registered": true,
       "workflow": "release.yml",
-      "note": "first release pending; README in state A"
+      "note": "first release 0.5.0 published 2026-10-09 by release.yml (PyPI trusted publishing) with provenance attestations"
     },
     {
       "registry": "pypi",
