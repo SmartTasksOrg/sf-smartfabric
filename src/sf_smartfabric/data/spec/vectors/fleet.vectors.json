@@ -1,0 +1,110 @@
+{
+  "family": "fleet",
+  "tolerance": 1e-09,
+  "cases": [
+    {
+      "name": "scale-free-hub",
+      "escalation_threshold": 0.85,
+      "nodes": [
+        {
+          "node_id": "hub",
+          "pressure": 0.88,
+          "centrality": 0.92
+        },
+        {
+          "node_id": "mid",
+          "pressure": 0.71,
+          "centrality": 0.82
+        },
+        {
+          "node_id": "leaf",
+          "pressure": 0.12,
+          "centrality": 0.08
+        }
+      ],
+      "expect": {
+        "P_fleet": 0.77,
+        "peak_node": "hub",
+        "hot_nodes": [
+          "hub"
+        ]
+      }
+    },
+    {
+      "name": "uniform",
+      "escalation_threshold": 0.85,
+      "nodes": [
+        {
+          "node_id": "a",
+          "pressure": 0.5,
+          "centrality": 1.0
+        },
+        {
+          "node_id": "b",
+          "pressure": 0.5,
+          "centrality": 1.0
+        }
+      ],
+      "expect": {
+        "P_fleet": 0.5,
+        "peak_node": "a",
+        "hot_nodes": []
+      }
+    },
+    {
+      "name": "all-hot",
+      "escalation_threshold": 0.8,
+      "nodes": [
+        {
+          "node_id": "x",
+          "pressure": 0.9,
+          "centrality": 1.0
+        },
+        {
+          "node_id": "y",
+          "pressure": 0.85,
+          "centrality": 1.0
+        }
+      ],
+      "expect": {
+        "P_fleet": 0.875,
+        "peak_node": "x",
+        "hot_nodes": [
+          "x",
+          "y"
+        ]
+      }
+    },
+    {
+      "name": "zero-centrality",
+      "escalation_threshold": 0.85,
+      "nodes": [
+        {
+          "node_id": "a",
+          "pressure": 0.6,
+          "centrality": 0.0
+        },
+        {
+          "node_id": "b",
+          "pressure": 0.4,
+          "centrality": 0.0
+        }
+      ],
+      "expect": {
+        "P_fleet": 0.0,
+        "peak_node": "a",
+        "hot_nodes": []
+      }
+    },
+    {
+      "name": "empty",
+      "escalation_threshold": 0.85,
+      "nodes": [],
+      "expect": {
+        "P_fleet": 0.0,
+        "peak_node": null,
+        "hot_nodes": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "family": "pressure",
+  "tolerance": 1e-09,
+  "cases": [
+    {
+      "name": "defaults-climb-to-release",
+      "config": {},
+      "steps": [
+        {
+          "tokens": 1200,
+          "tool_calls": 2,
+          "depth": 1
+        },
+        {
+          "tokens": 1200,
+          "tool_calls": 2,
+          "depth": 1
+        },
+        {
+          "tokens": 1200,
+          "tool_calls": 2,
+          "depth": 1
+        },
+        {
+          "tokens": 1200,
+          "tool_calls": 2,
+          "depth": 1
+        },
+        {
+          "tokens": 1200,
+          "tool_calls": 2,
+          "depth": 1
+        },
+        {
+          "tokens": 1200,
+          "tool_calls": 2,
+          "depth": 1
+        }
+      ],
+      "expect": [
+        {
+          "p": 0.208,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.416,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.624,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.832,
+          "zone": "warning",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "release",
+          "released": true,
+          "locked": true
+        },
+        {
+          "p": 0.0,
+          "zone": "nominal",
+          "released": false,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "name": "dissipation-floor",
+      "config": {
+        "token_coefficient": 0.0,
+        "tool_coefficient": 0.0,
+        "depth_coefficient": 0.0,
+        "dissipation_per_step": 0.05
+      },
+      "steps": [
+        {
+          "tokens": 0
+        },
+        {
+          "tokens": 0
+        },
+        {
+          "tokens": 0
+        },
+        {
+          "tokens": 0
+        }
+      ],
+      "expect": [
+        {
+          "p": 0.0,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        }
+      ]
+    },
+    {
+      "name": "warning-band",
+      "config": {
+        "dissipation_per_step": 0.0
+      },
+      "steps": [
+        {
+          "tokens": 46667
+        }
+      ],
+      "expect": [
+        {
+          "p": 0.700005,
+          "zone": "warning",
+          "released": false,
+          "locked": false
+        }
+      ]
+    },
+    {
+      "name": "no-lock-cycles",
+      "config": {
+        "post_release_lock": false
+      },
+      "steps": [
+        {
+          "tokens": 40000,
+          "tool_calls": 5
+        },
+        {
+          "tokens": 40000,
+          "tool_calls": 5
+        },
+        {
+          "tokens": 40000,
+          "tool_calls": 5
+        },
+        {
+          "tokens": 40000,
+          "tool_calls": 5
+        }
+      ],
+      "expect": [
+        {
+          "p": 0.0,
+          "zone": "release",
+          "released": true,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "release",
+          "released": true,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "release",
+          "released": true,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "release",
+          "released": true,
+          "locked": false
+        }
+      ]
+    },
+    {
+      "name": "depth-driven",
+      "config": {
+        "token_coefficient": 0.0,
+        "tool_coefficient": 0.0
+      },
+      "steps": [
+        {
+          "depth": 10
+        },
+        {
+          "depth": 10
+        }
+      ],
+      "expect": [
+        {
+          "p": 0.48,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "release",
+          "released": true,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "name": "timed-dissipation",
+      "config": {
+        "dissipation_per_step": 0.0,
+        "dissipation_per_second": 0.1
+      },
+      "steps": [
+        {
+          "tokens": 20000,
+          "seconds": 1.0
+        },
+        {
+          "tokens": 0,
+          "seconds": 2.0
+        }
+      ],
+      "expect": [
+        {
+          "p": 0.2,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        },
+        {
+          "p": 0.0,
+          "zone": "nominal",
+          "released": false,
+          "locked": false
+        }
+      ]
+    }
+  ]
+}

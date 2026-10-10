@@ -8,28 +8,16 @@ Runs three things against bundled synthetic data, no network required:
 from __future__ import annotations
 
 import json
-from importlib import resources
-from pathlib import Path
 
 from . import conformance
 from .fingerprint import parse_address
 from .pressure import NodeSample, PressureConfig, PressureEngine, fleet_pressure
+from ._bundled import read_text
 
 
 def _bundled(*parts: str) -> dict:
     """Load a bundled JSON file, whether installed or run from source."""
-    try:
-        ref = resources.files("sf-smartfabric")
-        for p in parts:
-            ref = ref / p
-        return json.loads(ref.read_text())
-    except (ModuleNotFoundError, FileNotFoundError, AttributeError):
-        here = Path(__file__).resolve()
-        for parent in here.parents:
-            candidate = parent.joinpath(*parts)
-            if candidate.exists():
-                return json.loads(candidate.read_text())
-        raise FileNotFoundError("/".join(parts))
+    return json.loads(read_text(*parts))
 
 
 def _rule(title: str) -> str:

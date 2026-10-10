@@ -10,9 +10,9 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass
-from importlib import resources
 from pathlib import Path
 from typing import Any
+from ._bundled import read_text
 
 try:  # jsonschema is a hard dep of the package, but keep import errors legible
     import jsonschema
@@ -58,15 +58,9 @@ def parse_address(addr: str) -> Address:
 def _schema_text() -> str:
     """Load the packaged fingerprint schema (works installed or from source)."""
     try:
-        return (resources.files("sf-smartfabric") / "schema" / "fingerprint.schema.json").read_text()
-    except (ModuleNotFoundError, FileNotFoundError, AttributeError):
-        # source layout fallback: <repo>/schema/fingerprint.schema.json
-        here = Path(__file__).resolve()
-        for parent in here.parents:
-            candidate = parent / "schema" / "fingerprint.schema.json"
-            if candidate.exists():
-                return candidate.read_text()
-        raise FingerprintError("fingerprint schema not found on disk")
+        return read_text("schema", "fingerprint.schema.json")
+    except FileNotFoundError:
+        raise FingerprintError("fingerprint schema not found on disk") from None
 
 
 def load_schema() -> dict[str, Any]:
