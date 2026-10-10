@@ -11,7 +11,7 @@ syntax = "proto3";
 
 package iaiso.fabric.v0;
 
-option go_package = "github.com/SmartTasksOrg/smartfabric/gen/go;fabricv0";
+option go_package = "github.com/SmartTasksOrg/sf-smartfabric/gen/go;fabricv0";
 
 // ---- Enums -----------------------------------------------------------------
 

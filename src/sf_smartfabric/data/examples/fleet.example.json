@@ -1,0 +1,11 @@
+{
+  "fleet": "acme-governed-fleet",
+  "escalation_threshold": 0.85,
+  "nodes": [
+    { "node_id": "hub-router-0",   "pressure": 0.88, "centrality": 0.92 },
+    { "node_id": "model-7",        "pressure": 0.71, "centrality": 0.82 },
+    { "node_id": "tool-broker-3",  "pressure": 0.44, "centrality": 0.40 },
+    { "node_id": "leaf-agent-19",  "pressure": 0.12, "centrality": 0.08 },
+    { "node_id": "leaf-agent-27",  "pressure": 0.31, "centrality": 0.10 }
+  ]
+}

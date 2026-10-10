@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iaiso.dev/schema/fingerprint.schema.json",
+  "title": "IAIso Node Fingerprint",
+  "description": "The machine-readable descriptor every IAIso fabric node publishes. v0 draft, bound to IAIso v5.0 core.",
+  "type": "object",
+  "required": ["iaiso_version", "identity", "ports", "standards", "cir", "placement", "contract", "iaiso"],
+  "properties": {
+    "iaiso_version": { "type": "string", "const": "0.1" },
+    "identity": {
+      "type": "object",
+      "required": ["id", "public_key"],
+      "properties": {
+        "id": { "type": "string", "description": "stable node id (ULID/UUID)" },
+        "address": { "type": "string", "pattern": "^iaiso://" },
+        "public_key": { "type": "string", "description": "ed25519 public key" },
+        "attestation": { "type": "string", "description": "L0/L1 attestation blob (optional)" }
+      }
+    },
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["number", "transport", "binding", "tls", "plane", "direction"],
+        "properties": {
+          "number": { "type": "integer", "minimum": 0, "maximum": 65535 },
+          "transport": { "enum": ["tcp", "udp", "quic", "unix"] },
+          "binding": { "enum": ["grpc", "http2", "http3", "websocket", "raw"] },
+          "tls": { "enum": ["required", "optional", "none"] },
+          "plane": { "enum": ["data", "control", "observability"] },
+          "direction": { "enum": ["listen", "dial", "both"] }
+        }
+      }
+    },
+    "standards": {
+      "type": "object",
+      "description": "supported standards per concern; negotiation intersects these",
+      "properties": {
+        "transport": { "type": "array", "items": { "type": "string" } },
+        "serialization": { "type": "array", "items": { "type": "string" } },
+        "identity": { "type": "array", "items": { "type": "string" } },
+        "crypto": { "type": "array", "items": { "type": "string" } },
+        "schema": { "type": "array", "items": { "type": "string" } },
+        "observability": { "type": "array", "items": { "type": "string" } },
+        "domain": { "type": "array", "items": { "type": "string" } },
+        "governance": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "cir": {
+      "type": "object",
+      "required": ["verbs", "mapping"],
+      "properties": {
+        "verbs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["verb", "version"],
+            "properties": {
+              "verb": { "type": "string" },
+              "version": { "type": "string", "description": "semver or range" },
+              "capability": { "type": "string" }
+            }
+          }
+        },
+        "mapping": {
+          "type": "array",
+          "description": "command-level translation: native surface -> CIR",
+          "items": {
+            "type": "object",
+            "required": ["native", "cir_verb"],
+            "properties": {
+              "native": { "type": "string" },
+              "cir_verb": { "type": "string" },
+              "capability": { "type": "string" },
+              "field_map": { "type": "object", "additionalProperties": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "description": "the node's position across substrate tiers S0-S10",
+      "properties": {
+        "l0_silicon": { "type": "object" },
+        "l2_storage": { "type": "object" },
+        "l3_compute": { "type": "object" },
+        "l4_node": { "type": "object" },
+        "l5_network": { "type": "object" },
+        "l7_cloud": { "type": "object" },
+        "l8_jurisdiction": {
+          "type": "object",
+          "properties": {
+            "country": { "type": "string" },
+            "egress": { "enum": ["open", "restricted", "deny"] },
+            "cross_border": { "enum": ["allow", "deny_by_default", "deny"] },
+            "lawful_access": { "type": "string" }
+          }
+        },
+        "l9_topology": {
+          "type": "object",
+          "properties": {
+            "degree": { "type": "integer" },
+            "centrality": { "type": "number" }
+          }
+        },
+        "l10_dynamics": {
+          "type": "object",
+          "properties": {
+            "influence_class": { "enum": ["inert", "informational", "persuasive", "adaptive", "autonomous"] },
+            "feedback_loops": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "properties": {
+        "qos_profiles": { "type": "array", "items": { "type": "string" } },
+        "delivery": { "enum": ["at-most-once", "at-least-once", "exactly-once"] },
+        "residency": { "type": "string" },
+        "audit_level": { "enum": ["standard", "enhanced", "strict"] },
+        "conformance_report": { "type": "string", "description": "signed suite result" }
+      }
+    },
+    "iaiso": {
+      "type": "object",
+      "description": "IAIso containment posture — binds the node to the core framework (docs/07). Field names mirror IAIso v5.0 core spec/pressure.",
+      "required": ["framework_version", "enforced_layers", "pressure"],
+      "properties": {
+        "framework_version": { "type": "string" },
+        "enforced_layers": {
+          "type": "array",
+          "items": { "type": "number", "enum": [0, 1, 2, 3, 3.5, 4, 5, 6] }
+        },
+        "pressure": {
+          "type": "object",
+          "required": ["escalation_threshold", "release_threshold"],
+          "properties": {
+            "escalation_threshold": { "type": "number", "minimum": 0, "maximum": 1 },
+            "release_threshold": { "type": "number", "minimum": 0, "maximum": 1 },
+            "dissipation_per_step": { "type": "number", "minimum": 0 },
+            "dissipation_per_second": { "type": "number", "minimum": 0 },
+            "token_coefficient": { "type": "number", "minimum": 0, "description": "pressure per 1000 tokens" },
+            "tool_coefficient": { "type": "number", "minimum": 0 },
+            "depth_coefficient": { "type": "number", "minimum": 0 },
+            "post_release_lock": { "type": "boolean" },
+            "entropy_floor": { "type": "number", "description": "Layer 1 knob" },
+            "backprop_magnification": { "type": "boolean" },
+            "clock_ms": { "type": "integer", "minimum": 1, "description": "clocked evaluation interval (invariant 3)" }
+          }
+        },
+        "layer0_caps": {
+          "type": "object",
+          "properties": {
+            "max_flops": { "type": "number" },
+            "timeout_ms": { "type": "integer" },
+            "hardware_attested": { "type": "boolean" }
+          }
+        },
+        "consent": {
+          "type": "object",
+          "properties": {
+            "issuer": { "type": "string" },
+            "algo": { "type": "string", "description": "HS256/RS256 MUST; ES256/EdDSA MAY (core consent spec)" },
+            "scope_required": { "type": "boolean" }
+          }
+        },
+        "reset": {
+          "type": "object",
+          "properties": {
+            "lossy": { "type": "boolean" },
+            "consent_gated_persistence": { "type": "boolean" }
+          }
+        },
+        "invariants_attested": {
+          "type": "array",
+          "items": { "type": "integer", "enum": [1, 2, 3, 4, 5] }
+        },
+        "multi_party_auth": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

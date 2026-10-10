@@ -43,6 +43,31 @@ jobs:
       - name: Cross-language conformance (every port whose toolchain the runner has must agree)
         run: bash ports/conformance/run.sh
 
+  wheel:
+    # What a PyPI user gets: build the wheel, install it in a clean environment and run the
+    # commands that read bundled files, from an empty folder (no source tree to fall back on).
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1, read 2026-10-08
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0, read 2026-10-08
+        with:
+          python-version: '3.12'
+      - name: Build the wheel
+        run: |
+          python -m pip install build
+          python -m build --wheel --outdir "$RUNNER_TEMP/dist"
+      - name: Install it in a clean environment and run it from an empty folder
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/python" -m pip install "$RUNNER_TEMP"/dist/*.whl
+          mkdir "$RUNNER_TEMP/empty" && cd "$RUNNER_TEMP/empty"
+          "$RUNNER_TEMP/venv/bin/sf-smartfabric" --demo
+          "$RUNNER_TEMP/venv/bin/sf-smartfabric" vectors
+          "$RUNNER_TEMP/venv/bin/python" -c "import json; from sf_smartfabric import fingerprint, _bundled; errs = fingerprint.validate(json.loads(_bundled.read_text('schema', 'example.fingerprint.json'))); assert errs == [], errs"
+
   install-lines:
     runs-on: ubuntu-latest
     timeout-minutes: 5

@@ -1,0 +1,84 @@
+{
+  "iaiso_version": "0.1",
+  "identity": {
+    "id": "01J9Z8ACME0000000000000007",
+    "address": "iaiso://acme-model-7@cn.bj.az2/l3:gpu/l8:cn-restricted/l9:c0.82/text.generate",
+    "public_key": "ed25519:MC4CAQAwBQYDK2VwBCIEI...",
+    "attestation": "tpm2:quote:..."
+  },
+  "ports": [
+    { "number": 8443, "transport": "tcp", "binding": "grpc", "tls": "required", "plane": "data", "direction": "both" },
+    { "number": 8444, "transport": "tcp", "binding": "http2", "tls": "required", "plane": "control", "direction": "listen" },
+    { "number": 4317, "transport": "tcp", "binding": "grpc", "tls": "required", "plane": "observability", "direction": "dial" }
+  ],
+  "standards": {
+    "transport": ["grpc", "http/2"],
+    "serialization": ["protobuf", "json"],
+    "identity": ["mtls", "spiffe"],
+    "crypto": ["tls1.3", "ed25519", "aes-256-gcm"],
+    "schema": ["protobuf3", "json-schema"],
+    "observability": ["otel-traces", "otel-metrics", "otel-logs"],
+    "domain": ["openai-chat", "mcp", "smartllmcost"],
+    "governance": ["iaiso-policy/1", "residency/1", "provenance/1"]
+  },
+  "cir": {
+    "verbs": [
+      { "verb": "describe", "version": "0.1" },
+      { "verb": "negotiate", "version": "0.1" },
+      { "verb": "invoke", "version": "0.1", "capability": "text.generate" },
+      { "verb": "stream.open", "version": "0.1", "capability": "text.generate" },
+      { "verb": "pressure.sample", "version": "0.1" },
+      { "verb": "consent.assert", "version": "0.1" },
+      { "verb": "provenance.emit", "version": "0.1" },
+      { "verb": "halt.global", "version": "0.1" }
+    ],
+    "mapping": [
+      {
+        "native": "POST /v1/chat/completions",
+        "cir_verb": "invoke",
+        "capability": "text.generate",
+        "field_map": {
+          "messages": "body.payload.messages",
+          "temperature": "body.payload.params.temperature",
+          "max_tokens": "body.payload.params.max_tokens"
+        }
+      }
+    ]
+  },
+  "placement": {
+    "l3_compute": { "accelerator": "gpu", "confidential_compute": false },
+    "l7_cloud": { "provider": "self-hosted", "region": "cn-beijing", "az": "az2" },
+    "l8_jurisdiction": { "country": "CN", "egress": "restricted", "cross_border": "deny_by_default", "lawful_access": "cn" },
+    "l9_topology": { "degree": 34, "centrality": 0.82 },
+    "l10_dynamics": { "influence_class": "informational", "feedback_loops": false }
+  },
+  "contract": {
+    "qos_profiles": ["interactive-low-latency"],
+    "delivery": "at-least-once",
+    "residency": "CN",
+    "audit_level": "enhanced",
+    "conformance_report": "sha256:report:..."
+  },
+  "iaiso": {
+    "framework_version": "5.0",
+    "enforced_layers": [0, 1, 2, 4, 5],
+    "pressure": {
+      "escalation_threshold": 0.85,
+      "release_threshold": 0.95,
+      "dissipation_per_step": 0.02,
+      "dissipation_per_second": 0.0,
+      "token_coefficient": 0.015,
+      "tool_coefficient": 0.08,
+      "depth_coefficient": 0.05,
+      "post_release_lock": true,
+      "entropy_floor": 1.5,
+      "backprop_magnification": true,
+      "clock_ms": 1000
+    },
+    "layer0_caps": { "max_flops": 10000000000000.0, "timeout_ms": 30000, "hardware_attested": true },
+    "consent": { "issuer": "https://consent.smarttasks.cloud", "algo": "ed25519", "scope_required": true },
+    "reset": { "lossy": true, "consent_gated_persistence": true },
+    "invariants_attested": [1, 2, 3, 4, 5],
+    "multi_party_auth": 2
+  }
+}

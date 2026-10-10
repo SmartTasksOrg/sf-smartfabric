@@ -30,8 +30,8 @@ runs:
       env:
         PKG: ${{ inputs.package }}
       run: |
-        # Never install by name: "smartfabric" is not published on PyPI by the
-        # maintainers yet, so a package of that name is not ours.
+        # Installs from this action's own checkout, i.e. the version you pinned in
+        # `uses:`. Never by the name "smartfabric" (without sf-): a package of that name is not ours.
         if [ -z "$PKG" ]; then
           PKG="$GITHUB_ACTION_PATH/../.."
           if [ ! -f "$PKG/pyproject.toml" ]; then

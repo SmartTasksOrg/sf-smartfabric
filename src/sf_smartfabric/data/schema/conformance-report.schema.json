@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iaiso.dev/schema/conformance-report.schema.json",
+  "title": "IAIso Fabric Conformance Report",
+  "description": "The signed result a node carries in contract.conformance_report.",
+  "type": "object",
+  "required": ["node", "suite_version", "ran_at", "results", "checks"],
+  "properties": {
+    "node": { "type": "string" },
+    "suite_version": { "type": "string" },
+    "ran_at": { "type": "string", "format": "date-time" },
+    "results": {
+      "type": "object",
+      "required": ["must"],
+      "properties": {
+        "must": { "enum": ["pass", "fail"] },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "pass": { "type": "integer" },
+            "fail": { "type": "integer" },
+            "skip": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "level", "result"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^FAB-" },
+          "title": { "type": "string" },
+          "level": { "enum": ["MUST", "SHOULD"] },
+          "result": { "enum": ["pass", "fail", "skip"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "signature": {
+      "type": ["string", "null"],
+      "description": "ed25519:... in production; sha256:... content digest in the reference impl"
+    }
+  }
+}
