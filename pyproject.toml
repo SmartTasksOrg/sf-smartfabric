@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sf-smartfabric"
-version = "0.5.0"
+version = "0.5.1"
 description = "IAIso Fabric Protocol (IFP) — carry & enforce IAIso containment across a fleet of governed AI nodes."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -47,11 +47,11 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.setuptools.package-data]
-sf_smartfabric = ["py.typed"]
-# The normative schema/ and examples/ live at the repo root (spec-first layout,
-# like the rest of the Smart* family). The library resolves them from the source
-# tree; a packaging step that vendors them into the wheel is tracked in
-# private/roadmap/ENHANCEMENTS.md.
+sf_smartfabric = ["py.typed", "data/schema/*.json", "data/examples/*.json", "data/spec/vectors/*.json"]
+# The normative schema/, examples/ and spec/vectors/ live at the repo root (spec-first
+# layout, like the rest of the Smart* family). The wheel carries identical copies under
+# src/sf_smartfabric/data/ so `--demo`, `vectors` and `validate` work from a PyPI install;
+# tests/test_bundled_data.py fails if a copy differs from its source.
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

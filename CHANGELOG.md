@@ -4,6 +4,25 @@ All notable changes to SmartFabric (the IAIso Fabric Protocol reference).
 
 ## Unreleased
 
+## 0.5.1
+
+### Fixed
+- A PyPI install could not run `sf-smartfabric --demo`, `sf-smartfabric vectors` or fingerprint validation: the files
+  they read (`schema/`, `examples/`, `spec/vectors/`) were not in the wheel, and the lookup used the distribution name
+  `sf-smartfabric` instead of the package `sf_smartfabric`. The wheel now carries identical copies under
+  `sf_smartfabric/data/` (a test fails if a copy differs from its source) and one helper reads them, from a PyPI
+  install or a clone. A new CI job installs the built wheel in a clean environment and runs all three from an empty folder.
+
+### Documentation
+- README "Install": `pip install sf-smartfabric` now that the first release is on PyPI, with how to check its provenance;
+  "Status" says where it is published. `names.json` marks `sf-smartfabric` as registered.
+- `publish/server.json` (the MCP registry manifest) is back under its normal name; it is not submitted to the registry yet.
+- Release check: the wheel installed in a clean environment now runs the README's demo command from an empty folder, not only `--version`.
+
+## 0.5.0 — first PyPI release as `sf-smartfabric` (2026-10-09)
+
+Published to PyPI on 2026-10-09 from tag `v0.5.0` by `.github/workflows/release.yml`, with provenance attestations. The version number is the same as the 0.5.0 entry below; these are the changes made before that first upload.
+
 ### Security
 - Install instructions no longer name packages the maintainers have not
   published. Until the first release, install from a clone (README, "Install").

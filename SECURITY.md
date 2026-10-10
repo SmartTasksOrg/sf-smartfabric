@@ -1,6 +1,6 @@
 # Security policy
 
-SmartFabric 0.5.0 is experimental software. It has had no independent
+SmartFabric 0.5.1 is experimental software. It has had no independent
 security review. [README "Status"](README.md#status) says what is tested and
 what is not.
 

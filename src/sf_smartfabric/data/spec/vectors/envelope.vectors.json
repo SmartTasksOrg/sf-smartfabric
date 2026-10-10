@@ -1,0 +1,128 @@
+{
+  "family": "envelope",
+  "encoding": "canonical-json",
+  "cases": [
+    {
+      "name": "minimal-invoke",
+      "message": {
+        "header": {
+          "from": "iaiso://a@dc1/text.generate",
+          "id": "01J9Z8INVOKE00000000000001",
+          "to": "iaiso://b@dc1/text.generate",
+          "verb": "invoke",
+          "verb_version": "0.1"
+        },
+        "policy": {
+          "audit_required": true
+        }
+      },
+      "expect": {
+        "canonical_json": "{\"header\":{\"from\":\"iaiso://a@dc1/text.generate\",\"id\":\"01J9Z8INVOKE00000000000001\",\"to\":\"iaiso://b@dc1/text.generate\",\"verb\":\"invoke\",\"verb_version\":\"0.1\"},\"policy\":{\"audit_required\":true}}",
+        "canonical_sha256": "sha256:49b004fe0fbeb817908cd5e890cf90d406f44e6e47931788f3ad4204ff0ab720",
+        "framed_hex": "bc017b22686561646572223a7b2266726f6d223a22696169736f3a2f2f61406463312f746578742e67656e6572617465222c226964223a2230314a395a38494e564f4b453030303030303030303030303031222c22746f223a22696169736f3a2f2f62406463312f746578742e67656e6572617465222c2276657262223a22696e766f6b65222c22766572625f76657273696f6e223a22302e31227d2c22706f6c696379223a7b2261756469745f7265717569726564223a747275657d7d"
+      }
+    },
+    {
+      "name": "full-with-consent",
+      "message": {
+        "auth": {
+          "sig": "ed25519:deadbeef",
+          "token": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZ2VudCJ9.sig"
+        },
+        "body": {
+          "payload": {
+            "messages": [
+              {
+                "content": "hi",
+                "role": "user"
+              }
+            ]
+          },
+          "schema_ref": "text.generate/1"
+        },
+        "header": {
+          "deadline_ms": 30000,
+          "from": "iaiso://client@us.east/agent",
+          "id": "01J9Z8FULL0000000000000002",
+          "idempotency": "idem-abc-123",
+          "qos_profile": "interactive-low-latency",
+          "to": "iaiso://model-7@cn.bj/text.generate",
+          "trace": "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01",
+          "verb": "invoke",
+          "verb_version": "0.1"
+        },
+        "meta": {
+          "cost_hint": "smartllmcost",
+          "placement_hint": "cn.bj.az2"
+        },
+        "policy": {
+          "audit_required": true,
+          "influence_class": "informational",
+          "residency": "CN"
+        }
+      },
+      "expect": {
+        "canonical_json": "{\"auth\":{\"sig\":\"ed25519:deadbeef\",\"token\":\"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZ2VudCJ9.sig\"},\"body\":{\"payload\":{\"messages\":[{\"content\":\"hi\",\"role\":\"user\"}]},\"schema_ref\":\"text.generate/1\"},\"header\":{\"deadline_ms\":30000,\"from\":\"iaiso://client@us.east/agent\",\"id\":\"01J9Z8FULL0000000000000002\",\"idempotency\":\"idem-abc-123\",\"qos_profile\":\"interactive-low-latency\",\"to\":\"iaiso://model-7@cn.bj/text.generate\",\"trace\":\"00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01\",\"verb\":\"invoke\",\"verb_version\":\"0.1\"},\"meta\":{\"cost_hint\":\"smartllmcost\",\"placement_hint\":\"cn.bj.az2\"},\"policy\":{\"audit_required\":true,\"influence_class\":\"informational\",\"residency\":\"CN\"}}",
+        "canonical_sha256": "sha256:0872d40b20f75f8dae0c57a885150c014f289350c6ef2886c95358cf58b07dc4",
+        "framed_hex": "8e057b2261757468223a7b22736967223a22656432353531393a6465616462656566222c22746f6b656e223a2265794a68624763694f694a53557a49314e694a392e65794a7a645749694f694a685a32567564434a392e736967227d2c22626f6479223a7b227061796c6f6164223a7b226d65737361676573223a5b7b22636f6e74656e74223a226869222c22726f6c65223a2275736572227d5d7d2c22736368656d615f726566223a22746578742e67656e65726174652f31227d2c22686561646572223a7b22646561646c696e655f6d73223a33303030302c2266726f6d223a22696169736f3a2f2f636c69656e744075732e656173742f6167656e74222c226964223a2230314a395a3846554c4c30303030303030303030303030303032222c226964656d706f74656e6379223a226964656d2d6162632d313233222c22716f735f70726f66696c65223a22696e7465726163746976652d6c6f772d6c6174656e6379222c22746f223a22696169736f3a2f2f6d6f64656c2d3740636e2e626a2f746578742e67656e6572617465222c227472616365223a2230302d30616637363531393136636434336464383434386562323131633830333139632d623761643662373136393230333333312d3031222c2276657262223a22696e766f6b65222c22766572625f76657273696f6e223a22302e31227d2c226d657461223a7b22636f73745f68696e74223a22736d6172746c6c6d636f7374222c22706c6163656d656e745f68696e74223a22636e2e626a2e617a32227d2c22706f6c696379223a7b2261756469745f7265717569726564223a747275652c22696e666c75656e63655f636c617373223a22696e666f726d6174696f6e616c222c227265736964656e6379223a22434e227d7d"
+      }
+    },
+    {
+      "name": "pressure-sample",
+      "message": {
+        "body": {
+          "payload": {
+            "clock_seq": 42,
+            "dpdt": 0.05,
+            "p": 0.83,
+            "zone": "warning"
+          },
+          "schema_ref": "pressure.sample/1"
+        },
+        "header": {
+          "from": "iaiso://model-7@cn.bj/text.generate",
+          "id": "01J9Z8PSAMPLE0000000000003",
+          "to": "iaiso://aggregator@fabric/pressure",
+          "verb": "pressure.sample",
+          "verb_version": "0.1"
+        },
+        "policy": {
+          "audit_required": true
+        }
+      },
+      "expect": {
+        "canonical_json": "{\"body\":{\"payload\":{\"clock_seq\":42,\"dpdt\":0.05,\"p\":0.83,\"zone\":\"warning\"},\"schema_ref\":\"pressure.sample/1\"},\"header\":{\"from\":\"iaiso://model-7@cn.bj/text.generate\",\"id\":\"01J9Z8PSAMPLE0000000000003\",\"to\":\"iaiso://aggregator@fabric/pressure\",\"verb\":\"pressure.sample\",\"verb_version\":\"0.1\"},\"policy\":{\"audit_required\":true}}",
+        "canonical_sha256": "sha256:551273814be6166a5862cbdf78e102bb1c8122254adbc781aad7464c23dbf819",
+        "framed_hex": "bf027b22626f6479223a7b227061796c6f6164223a7b22636c6f636b5f736571223a34322c2264706474223a302e30352c2270223a302e38332c227a6f6e65223a227761726e696e67227d2c22736368656d615f726566223a2270726573737572652e73616d706c652f31227d2c22686561646572223a7b2266726f6d223a22696169736f3a2f2f6d6f64656c2d3740636e2e626a2f746578742e67656e6572617465222c226964223a2230314a395a385053414d504c4530303030303030303030303033222c22746f223a22696169736f3a2f2f61676772656761746f72406661627269632f7072657373757265222c2276657262223a2270726573737572652e73616d706c65222c22766572625f76657273696f6e223a22302e31227d2c22706f6c696379223a7b2261756469745f7265717569726564223a747275657d7d"
+      }
+    },
+    {
+      "name": "halt-global",
+      "message": {
+        "body": {
+          "payload": {
+            "drain": false,
+            "origin": "halt-controller",
+            "reason": "L6 trip"
+          },
+          "schema_ref": "halt.global/1"
+        },
+        "header": {
+          "from": "iaiso://halt-controller@fabric/existential",
+          "id": "01J9Z8HALT00000000000000004",
+          "to": "iaiso://all@fabric",
+          "verb": "halt.global",
+          "verb_version": "0.1"
+        },
+        "policy": {
+          "audit_required": true
+        }
+      },
+      "expect": {
+        "canonical_json": "{\"body\":{\"payload\":{\"drain\":false,\"origin\":\"halt-controller\",\"reason\":\"L6 trip\"},\"schema_ref\":\"halt.global/1\"},\"header\":{\"from\":\"iaiso://halt-controller@fabric/existential\",\"id\":\"01J9Z8HALT00000000000000004\",\"to\":\"iaiso://all@fabric\",\"verb\":\"halt.global\",\"verb_version\":\"0.1\"},\"policy\":{\"audit_required\":true}}",
+        "canonical_sha256": "sha256:7b8ea7de5bf2023a4187e9770b7c64d141f974af8c425b1e0930af875d7bb90e",
+        "framed_hex": "b6027b22626f6479223a7b227061796c6f6164223a7b22647261696e223a66616c73652c226f726967696e223a2268616c742d636f6e74726f6c6c6572222c22726561736f6e223a224c362074726970227d2c22736368656d615f726566223a2268616c742e676c6f62616c2f31227d2c22686561646572223a7b2266726f6d223a22696169736f3a2f2f68616c742d636f6e74726f6c6c6572406661627269632f6578697374656e7469616c222c226964223a2230314a395a3848414c543030303030303030303030303030303034222c22746f223a22696169736f3a2f2f616c6c40666162726963222c2276657262223a2268616c742e676c6f62616c222c22766572625f76657273696f6e223a22302e31227d2c22706f6c696379223a7b2261756469745f7265717569726564223a747275657d7d"
+      }
+    }
+  ]
+}

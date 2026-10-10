@@ -20,14 +20,13 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
-from importlib import resources
-from pathlib import Path
 from typing import Any
 
 from .conformance import run as run_conformance
 from .fingerprint import validate as validate_fp
 from .pressure import NodeSample, PressureConfig, PressureEngine, fleet_pressure
 from .wire import encode, frame_message, decode
+from ._bundled import read_text
 
 TOLERANCE = 1e-9
 
@@ -42,19 +41,7 @@ class VectorResult:
 
 def _load(name: str) -> Any:
     """Load a bundled vector file from spec/vectors/ (source or installed)."""
-    parts = ("spec", "vectors", name)
-    try:
-        ref = resources.files("sf-smartfabric")
-        for p in parts:
-            ref = ref / p
-        return json.loads(ref.read_text())
-    except (ModuleNotFoundError, FileNotFoundError, AttributeError):
-        here = Path(__file__).resolve()
-        for parent in here.parents:
-            cand = parent.joinpath(*parts)
-            if cand.exists():
-                return json.loads(cand.read_text())
-        raise FileNotFoundError("/".join(parts))
+    return json.loads(read_text("spec", "vectors", name))
 
 
 def _approx(a: float, b: float) -> bool:

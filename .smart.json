@@ -1,7 +1,7 @@
 {
   "family": "Smart*",
   "tool": "SmartFabric",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "protocol": "IAIso Fabric Protocol (IFP)",
   "iaiso_section": "§0 · Fabric (fleet containment)",
   "rule_prefix": "FAB-*",
